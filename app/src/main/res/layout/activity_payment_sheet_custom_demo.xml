@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f6f6f6"
+    android:fitsSystemWindows="true">
+
+    <!--第一部分：伸缩工具栏-->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:elevation="0dp"
+        tools:ignore="MissingConstraints">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:title=""
+            app:titleEnabled="false">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:minHeight="46dp"
+                app:layout_collapseMode="pin"
+                app:title="">
+
+                <RelativeLayout
+                    android:id="@+id/moneycollect_payment_backfl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="@dimen/size_6dp"
+                    android:paddingRight="@dimen/size_16dp">
+
+                    <ImageView
+                        android:id="@+id/back_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:background="@mipmap/icon_back" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/paymentsheet_secure_payment"
+                    android:textColor="#333333"
+                    android:textSize="@dimen/size_18dp"
+                    android:textStyle="bold" />
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingLeft="14dp"
+        android:paddingTop="16dp"
+        android:paddingRight="14dp"
+        android:paddingBottom="28dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/paymentsheet_your_cart"
+            android:textColor="#333333"
+            android:textSize="@dimen/size_18dp"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/sheet_expanded_menu_rl"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="@dimen/size_8dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_2dp"
+            android:layout_marginTop="@dimen/size_20dp"
+            android:layout_marginBottom="@dimen/size_20dp"
+            android:background="@color/color_e6eaee" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|left"
+                android:text="@string/paymentsheet_total"
+                android:textColor="#333333"
+                android:textSize="@dimen/size_18dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/payment_checkout_amount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|right"
+                android:text="@string/paymentsheet_total_amount"
+                android:textColor="#333333"
+                android:textSize="@dimen/size_18dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/sheet_payment_method_select_cl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/paymentsheet_payment_method"
+                android:textColor="#333333"
+                android:textSize="@dimen/size_18dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/sheet_payment_method_select_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginRight="@dimen/size_6dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/sheet_payment_method_select_tv"
+                app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/sheet_payment_method_select_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/paymentsheet_select"
+                android:textColor="@color/mc_color_bluebtn"
+                android:textSize="@dimen/size_16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/payment_error_message_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_9dp"
+            android:layout_marginRight="@dimen/size_16dp"
+            android:textSize="12sp"
+            android:lineSpacingExtra="@dimen/size_2dp"
+            android:textColor="@color/mc_color_payment_error_red"/>
+
+        <com.moneycollect.android.ui.view.MoneyCollectButtonView
+            android:id="@+id/payment_checkout_btn"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_30dp"
+            android:layout_marginBottom="@dimen/size_10dp"
+            app:button_height="@dimen/size_56dp"/>
+
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

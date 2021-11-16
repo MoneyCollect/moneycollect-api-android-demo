@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container_create_pm"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:padding="@dimen/size_16dp">
+
+    <com.moneycollect.android.ui.view.MoneyCollectButtonView
+        android:id="@+id/button_widget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/size_50dp"
+        android:layout_marginBottom="@dimen/size_29dp"
+        android:layout_marginLeft="@dimen/size_16dp"
+        android:layout_marginRight="@dimen/size_16dp"
+        app:button_height="@dimen/size_50dp"
+        />
+
+
+    <Button
+        android:id="@+id/start_holding_anim"
+        android:layout_width="@dimen/size_275dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_30dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/payment_bg_r8_shadow1_darkblue"
+        android:text="START HOLDING ANIM"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_15sp"/>
+
+    <Button
+        android:id="@+id/start_complete_anim"
+        android:layout_width="@dimen/size_275dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_25dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/payment_bg_r8_shadow1_darkblue"
+        android:text="START COMPLETE ANIM"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_15sp"/>
+
+    <Button
+        android:id="@+id/stop_anim"
+        android:layout_width="@dimen/size_275dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_25dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/payment_bg_r8_shadow1_darkblue"
+        android:text="STOP ANIM"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_15sp"/>
+
+    <Button
+        android:id="@+id/setting_button_enable"
+        android:layout_width="@dimen/size_275dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_25dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/payment_bg_r8_shadow1_darkblue"
+        android:text="SETTING BUTTON ENABLE"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_15sp"/>
+
+    <Button
+        android:id="@+id/setting_button_unenable"
+        android:layout_width="@dimen/size_275dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_25dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/payment_bg_r8_shadow1_darkblue"
+        android:text="SETTING BUTTON UNENABLE"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_15sp"/>
+
+</LinearLayout>
+
