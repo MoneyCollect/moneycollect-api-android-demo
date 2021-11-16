@@ -4,13 +4,15 @@ Mobile Sdk发起交易示例图
 
 ![3张-1@2x](https://user-images.githubusercontent.com/92731686/141933450-8daa8efa-1648-4410-b0bf-97d6735d9da5.png)
 
-
 ### Set up MoneyConnectServer-sideClient-side
 
 First, you need a MoneyConnect account. [Register now](https://portal.moneycollect.com/registerr).
 
 **<h1>1. Set up Server-side</h1>**
-客户端想要访问大部分MoneyConnectServer API，需要商户后台通过私钥发起请求，下载github上模拟商户后台服务接口代码[Download now](https://github.com/MoneyCollect/moneycollect-api-android-demo).
+客户端想要访问大部分MoneyConnectServer API，需要商户后台通过私钥发起请求，下载github上模拟商户后台服务接口代码[Download now](https://github.com/MoneyCollect/moneycollect-api-android-demo/tree/mcappserver).
+
+
+> **<h3> 1.1 替换MobilePayController.java文件里面的公钥私钥成自己的<h3>**
 ```
 //Your account PUBLIC_SECRET("Bearer "+PUBLIC_SECRET)
 private static final String PUBLIC_SECRET = "Bearer live_pu_OGJ0EidwEg4GjymEiRD7cUBk7IQIYmhwhJlUM****";
@@ -18,7 +20,12 @@ private static final String PUBLIC_SECRET = "Bearer live_pu_OGJ0EidwEg4GjymEiRD7
 private static final String PRVATE_SECRET = "Bearer live_pr_OGJ0EidwEg4GjymEiRD4MRxBCo0OumdH6URv****";
 ```
 代码中公钥和私钥格式是（"Bearer "+PUBLIC_SECRET）
-商户把代码中的公钥和私钥替换成自己的然后开启服务代码默认端口9099可修改 （商户后台接口地址为本机ip:9099）
+
+> **<h3> 1.2 修改端口号（默认写死9898）<h3>**
+```
+server.port=9898
+```
+商户把代码中的公钥和私钥替换成自己的然后开启服务代码默认端口9099可修改 （商户后台接口地址为本机ip:9898）
 
 **<h1>2. Set up Client-side</h1>**
 
@@ -56,7 +63,7 @@ private static final String PRVATE_SECRET = "Bearer live_pr_OGJ0EidwEg4GjymEiRD4
 * publishableKey: String,      (公钥)
 * customerServerUrl: String?   (标题1中的本机ip:9099)
 **/
-MoneyCollectSdk.init(this, "live_pu_OGJ0EidwEg4GjymEiRD7cUBk7IQIYmhwhJlUM****","http://192.168.2.100:9099/")
+MoneyCollectSdk.init(this, "live_pu_OGJ0EidwEg4GjymEiRD7cUBk7IQIYmhwhJlUM****","http://192.168.2.100:9898/")
 
  ```
 
