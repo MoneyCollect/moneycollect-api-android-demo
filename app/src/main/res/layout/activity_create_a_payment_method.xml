@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="true"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:id="@+id/container_create_pm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:paddingBottom="@dimen/size_18dp">
+
+        <LinearLayout
+            android:id="@+id/billing_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:padding="@dimen/size_16dp"
+            android:orientation="vertical"
+            android:fitsSystemWindows="true">
+            <LinearLayout
+                android:id="@+id/address_layout"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:background="@drawable/mc_payment_bg_select_r8"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingLeft="8dp"
+                android:paddingRight="12dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/address_tl"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:paddingLeft="12dp"
+                    android:paddingTop="4dp"
+                    android:paddingRight="12dp"
+                    android:paddingBottom="4dp"
+                    android:textColorHint="#737373"
+                    android:textSize="13sp"
+                    app:counterEnabled="false"
+                    app:hintAnimationEnabled="true"
+                    app:hintEnabled="true"
+                    android:hint="Address line1"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:boxStrokeWidth="0dp"
+                    app:hintTextAppearance="@style/mc_payment_floattextcolor">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/address_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:textColor="#333333"
+                        android:layout_gravity="center_vertical"
+                        android:textCursorDrawable="@drawable/mc_et_cursor_bg"
+                        android:textColorHint="#737373"
+                        android:textSize="13sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <View
+                    android:layout_width="1px"
+                    android:layout_height="match_parent"
+                    android:background="@color/mc_color_line_default"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/address_second_tl"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:paddingLeft="12dp"
+                    android:paddingTop="4dp"
+                    android:paddingRight="12dp"
+                    android:paddingBottom="4dp"
+                    android:textColorHint="#737373"
+                    android:textSize="13sp"
+                    app:counterEnabled="false"
+                    app:hintAnimationEnabled="true"
+                    app:hintEnabled="true"
+                    android:hint="Address line2"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:boxStrokeWidth="0dp"
+                    app:hintTextAppearance="@style/mc_payment_floattextcolor">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/address_second_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:textColor="#333333"
+                        android:layout_gravity="center_vertical"
+                        android:textCursorDrawable="@drawable/mc_et_cursor_bg"
+                        android:textColorHint="#737373"
+                        android:textSize="13sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginTop="13dp"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:id="@+id/city_layout"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/mc_payment_bg_select_r8"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="12dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/city_tl"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:paddingLeft="12dp"
+                        android:paddingTop="4dp"
+                        android:paddingRight="12dp"
+                        android:paddingBottom="4dp"
+                        android:textColorHint="#737373"
+                        android:textSize="13sp"
+                        app:counterEnabled="false"
+                        app:hintAnimationEnabled="true"
+                        app:hintEnabled="true"
+                        android:hint="City"
+                        app:boxStrokeWidthFocused="0dp"
+                        app:boxStrokeWidth="0dp"
+                        app:hintTextAppearance="@style/mc_payment_floattextcolor">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/city_et"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:textColor="#333333"
+                            android:layout_gravity="center_vertical"
+                            android:textCursorDrawable="@drawable/mc_et_cursor_bg"
+                            android:textColorHint="#737373"
+                            android:textSize="13sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/state_layout"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="@dimen/size_20dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/mc_payment_bg_select_r8"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="12dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/state_tl"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:paddingLeft="12dp"
+                        android:paddingTop="4dp"
+                        android:paddingRight="12dp"
+                        android:paddingBottom="4dp"
+                        android:textColorHint="#737373"
+                        android:textSize="13sp"
+                        app:counterEnabled="false"
+                        app:hintAnimationEnabled="true"
+                        app:hintEnabled="true"
+                        android:hint="State"
+                        app:boxStrokeWidthFocused="0dp"
+                        app:boxStrokeWidth="0dp"
+                        app:hintTextAppearance="@style/mc_payment_floattextcolor">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/state_et"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:textColor="#333333"
+                            android:layout_gravity="center_vertical"
+                            android:textCursorDrawable="@drawable/mc_et_cursor_bg"
+                            android:textColorHint="#737373"
+                            android:textSize="13sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginTop="13dp"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:id="@+id/post_code_layout"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/mc_payment_bg_select_r8"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="12dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/post_code_tl"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:paddingLeft="12dp"
+                        android:paddingTop="4dp"
+                        android:paddingRight="12dp"
+                        android:paddingBottom="4dp"
+                        android:textColorHint="#737373"
+                        android:textSize="13sp"
+                        app:counterEnabled="false"
+                        app:hintAnimationEnabled="true"
+                        app:hintEnabled="true"
+                        android:hint="PostCode"
+                        app:boxStrokeWidthFocused="0dp"
+                        app:boxStrokeWidth="0dp"
+                        app:hintTextAppearance="@style/mc_payment_floattextcolor">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/post_code_et"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:textColor="#333333"
+                            android:layout_gravity="center_vertical"
+                            android:textCursorDrawable="@drawable/mc_et_cursor_bg"
+                            android:textColorHint="#737373"
+                            android:textSize="13sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/country_layout"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="@dimen/size_20dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/mc_payment_bg_select_r8"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="12dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/country_tl"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:paddingLeft="12dp"
+                        android:paddingTop="4dp"
+                        android:paddingRight="12dp"
+                        android:paddingBottom="4dp"
+                        android:textColorHint="#737373"
+                        android:textSize="13sp"
+                        app:counterEnabled="false"
+                        app:hintAnimationEnabled="true"
+                        app:hintEnabled="true"
+                        android:hint="Country"
+                        app:boxStrokeWidthFocused="0dp"
+                        app:boxStrokeWidth="0dp"
+                        app:hintTextAppearance="@style/mc_payment_floattextcolor">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/country_et"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:textColor="#333333"
+                            android:layout_gravity="center_vertical"
+                            android:textCursorDrawable="@drawable/mc_et_cursor_bg"
+                            android:textColorHint="#737373"
+                            android:textSize="13sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <com.moneycollect.android.ui.view.MoneyCollectContentView
+            android:id="@+id/create_pm_widget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/mc_retrieve_payment_method_btn"
+            android:layout_width="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="@dimen/size_50dp"
+            android:layout_marginLeft="@dimen/size_16dp"
+            android:layout_marginRight="@dimen/size_16dp"
+            android:layout_marginBottom="@dimen/size_20dp"
+            android:background="@drawable/mc_payment_bg_r8_shadow1_black"
+            android:text="RETRIEVE PAYMENT METHOD"
+            android:textAllCaps="false"
+            android:visibility="gone"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_15sp"/>
+
+        <Button
+            android:id="@+id/mc_attach_payment_method_btn"
+            android:layout_width="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="@dimen/size_50dp"
+            android:layout_marginLeft="@dimen/size_16dp"
+            android:layout_marginRight="@dimen/size_16dp"
+            android:layout_marginBottom="@dimen/size_10dp"
+            android:background="@drawable/mc_payment_bg_r8_shadow1_black"
+            android:text="ATTACH PAYMENT METHOD"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_15sp"/>
+
+        <TextView
+            android:id="@+id/result_tag"
+            android:layout_width="match_parent"
+            android:textSize="@dimen/text_size_16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/size_5dp"
+            android:layout_marginLeft="@dimen/size_10dp"
+            android:layout_height="wrap_content"/>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/size_10dp"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/result_tv"
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="@dimen/size_17dp"
+                    android:layout_marginRight="@dimen/size_17dp"
+                    android:layout_marginTop="@dimen/size_8dp"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

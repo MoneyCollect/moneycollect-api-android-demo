@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.moneycollect.example">
+
+    <application
+        android:name="com.moneycollect.example_java.ExampleApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.NewMerchantManagerSDK">
+
+
+        <activity android:name="com.moneycollect.example_java.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.moneycollect.example_java.activity.SaveCardActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyTheme.Dialog"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.moneycollect.example_java.activity.PayCardActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyTheme.Dialog"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.moneycollect.example_java.activity.PaymentMethodExampleActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyThemeLight"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.moneycollect.example_java.activity.CreateCustomerActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyThemeLight"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.moneycollect.example_java.activity.SelectCustomerPaymentMethodListActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyThemeLight"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.moneycollect.example_java.activity.PaymentExampleActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyThemeLight"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.moneycollect.example_java.activity.PaymentSheetDemoActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyThemeLight"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.moneycollect.example_java.activity.PaymentSheetCustomDemoActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyThemeLight"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.moneycollect.example_java.activity.SelectButtonTypeActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyThemeLight"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.moneycollect.example_java.activity.ValidationWebActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyThemeLight"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.moneycollect.example_java.activity.SettingsActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyThemeLight"
+            android:windowSoftInputMode="adjustResize" />
+    </application>
+
+</manifest>

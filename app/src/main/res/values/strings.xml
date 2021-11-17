@@ -1,0 +1,93 @@
+<resources>
+    <!--MainActivity-->
+    <string name="app_name">MoneyCollect SDK</string>
+    <string name="payment_sheet_demo_example">PaymentSheet Demo</string>
+    <string name="payment_sheet_demo_custom_example">PaymentSheet Custom Demo</string>
+    <string name="payment_card_pay_example">Card Pay Example</string>
+    <string name="payment_card_save_example">Card save Example</string>
+    <string name="payment_card_paymentMethod_example">PaymentMethod Example</string>
+    <string name="payment_card_create_customer_example">Create Customer</string>
+    <string name="payment_card_select_pm_list_example">Select PaymentMethod List Example</string>
+    <string name="payment_card_secure_example">Secure Payment</string>
+    <string name="payment_card_add_example">Add a card</string>
+    <string name="payment_card_payment_example">Payment Example</string>
+    <string name="payment_select_button_type_example">Select Button Type Example</string>
+    <string name="payment_select_button_type_setting">Setting</string>
+    <string name="payment_select_button_example">Button Example</string>
+
+    <!--SettingActivity currency unit-->
+    <string name="setting_currency_unit">Currency Unit</string>
+    <string name="setting_currency_usd">USD</string>
+    <string name="setting_currency_krw">KRW</string>
+    <string name="setting_currency_iqd">IQD</string>
+    <string name="setting_currency_usd_tag">$</string>
+    <string name="setting_currency_krw_tag">₩</string>
+    <string name="setting_currency_iqd_tag">ID</string>
+
+    <!--PaymentSheet Demo Activity-->
+    <string name="paymentsheet_secure_payment">Secure Payment</string>
+    <string name="paymentsheet_your_cart">Your cart</string>
+    <string name="paymentsheet_total">total</string>
+    <string name="paymentsheet_total_amount">$11622.00</string>
+    <string name="paymentsheet_payment_method">Payment Method</string>
+    <string name="paymentsheet_select">Select</string>
+    <string name="paymentsheet_checkout">Checkout</string>
+    <string name="paymentsheet_paynow">Pay Now</string>
+    <string name="paymentsheet_cancel">Cancel</string>
+    <string name="paymentsheet_item_goods_name">Goods Name</string>
+    <string name="paymentsheet_item_goods_price">$2.00</string>
+    <string name="paymentsheet_item_goods_amount">X1</string>
+
+    //web
+    <string name="payment_browser_confirm_title">Would you like to cancel the payment?</string>
+    <string name="payment_browser_confirm_yes">Confirm</string>
+    <string name="payment_browser_confirm_no">Cancel</string>
+
+
+    //other message
+    <string name="stop_anim_message_str">the anim is loading,please stop anim</string>
+    <string name="payment_empty_str">the payment is empty</string>
+    <string name="payment_id_empty_str">the paymentId is empty</string>
+    <string name="customer_id_empty_str">the customerId is empty</string>
+    <string name="payment_method_empty_str">the paymentMethod is empty</string>
+    <string name="payment_method_type_empty_str">the paymentMethod type is empty</string>
+    <string name="payment_method_id_empty_str">the paymentMethod id is empty</string>
+    <string name="payment_method_list_empty_str">the paymentMethod list is empty</string>
+    <string name="billing_detail_empty_str">the billingDetails is empty</string>
+    <string name="billing_detail_first_name_empty_str">the billingDetails firstName is empty</string>
+    <string name="billing_detail_last_name_empty_str">the billingDetails lastName is empty</string>
+    <string name="billing_detail_country_empty_str">the billingDetails country is empty</string>
+    <string name="billing_detail_line1_empty_str">the billingDetails line1 is empty</string>
+    <string name="card_no_empty_str">the cardNo is empty</string>
+    <string name="expyear_empty_str">the expYear is empty</string>
+    <string name="expmonth_empty_str">the expMonth is empty</string>
+    <string name="securitycode_empty_str">the securityCode is empty</string>
+    <string name="card_information_empty_str">the card information is empty</string>
+    <string name="payment_client_secret_empty_str">payment clientSecret is empty</string>
+    <string name="request_create_payment_empty_str">the requestCreatePayment data is empty</string>
+    <string name="request_confirm_payment_empty_str">the requestConfirmPayment data is empty</string>
+    <string name="customer_email_empty_str">the customer email is empty</string>
+    <string name="customer_first_name_empty_str">the customer firstName is empty</string>
+    <string name="customer_last_name_empty_str">the customer lastName is empty</string>
+    <string name="customer_phone_empty_str">the customer phone is empty</string>
+    <string name="city_empty_str">the city is empty</string>
+    <string name="country_empty_str">the county is empty</string>
+    <string name="line1_empty_str">the line1 is empty</string>
+    <string name="shipping_first_name_empty_str">the shipping firstName is empty</string>
+    <string name="shipping_last_name_empty_str">the shipping lastName is empty</string>
+    <string name="shipping_phone_empty_str">the shipping phone is empty</string>
+
+
+    <string name="create_customer_success_str">Create Customer success...</string>
+    <string name="create_customer_error_str">Create Customer error...</string>
+    <string name="create_payment_success_str">Create Payment success...</string>
+    <string name="create_payment_error_str">Create Payment error...</string>
+    <string name="confirm_payment_success_str">Confirm Payment success...</string>
+    <string name="confirm_payment_error_str">Confirm Payment error...</string>
+    <string name="retrive_payment_success_str">Retrieve Payment success...</string>
+    <string name="retrieve_payment_error_str">Retrieve Payment error...</string>
+    <string name="create_payment_method_success_str">Create PaymentMethod success...</string>
+    <string name="create_payment_method_error_str">Create PaymentMethod error...</string>
+    <string name="select_payment_method_list_success_str">Select PaymentMethod list success...</string>
+    <string name="select_payment_method_list_error_str">Select PaymentMethod list error...</string>
+</resources>
