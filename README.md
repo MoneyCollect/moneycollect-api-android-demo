@@ -1,6 +1,6 @@
 # Accept a payment
 
-Mobile Sdk发起交易示例图
+Mobile Sdk发起交易示例图 (demo是kotlin项目，[java版本请点击](https://github.com/MoneyCollect/moneycollect-api-android-demo/tree/mcjavademo))
 
 ![3张-1@2x](https://user-images.githubusercontent.com/92731686/141933450-8daa8efa-1648-4410-b0bf-97d6735d9da5.png)
 
