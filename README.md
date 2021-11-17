@@ -61,7 +61,7 @@ server.port=9898
 /**
 * context: Context,            (上下文环境)
 * publishableKey: String,      (公钥)
-* customerServerUrl: String?   (标题1中的本机ip:9099)
+* customerServerUrl: String?   (标题1中的本机ip:9898)
 **/
 MoneyCollectSdk.init(this, "live_pu_OGJ0EidwEg4GjymEiRD7cUBk7IQIYmhwhJlUM****","http://192.168.2.100:9898/")
 
