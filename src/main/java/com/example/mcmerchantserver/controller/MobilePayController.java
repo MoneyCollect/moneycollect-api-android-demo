@@ -26,8 +26,8 @@ public class MobilePayController {
 
     //Your account PUBLIC_SECRET("Bearer "+PUBLIC_SECRET)
     private static final String PUBLIC_SECRET = "Bearer test_pu_1sWrsjQP9PJiCwGsYv3risSn8YBCIEMNoVFIo8eR6s";
-    //Your account PRVATE_SECRET("Bearer "+PRVATE_SECRET)
-    private static final String PRVATE_SECRET = "Bearer test_pr_1sWrsjQP9PJiCwGsYv3rin6cs07xRDpeLXBbcpl0nPg";
+    //Your account PRIVATE_SECRET("Bearer "+PRIVATE_SECRET)
+    private static final String PRIVATE_SECRET = "Bearer test_pr_1sWrsjQP9PJiCwGsYv3rin6cs07xRDpeLXBbcpl0nPg";
 
     @Value(value = "${paymentgateway.mc_create_customer_url}")
     private String mcCreateCustomer_url;
@@ -60,7 +60,7 @@ public class MobilePayController {
 
         // 3.拼接请求头
         Map<String, String> headersMap = new HashMap<>();
-        headersMap.put("Authorization", PRVATE_SECRET);
+        headersMap.put("Authorization", PRIVATE_SECRET);
         headersMap.put("Content-Type", "application/json");
 
         // 4. 请求moneyconnect server
@@ -95,7 +95,7 @@ public class MobilePayController {
 
         // 3.拼接请求头
         Map<String, String> headersMap = new HashMap<>();
-        headersMap.put("Authorization", PRVATE_SECRET);
+        headersMap.put("Authorization", PRIVATE_SECRET);
         headersMap.put("Content-Type", "application/json");
 
         // 4. 请求moneyconnect server
@@ -130,7 +130,7 @@ public class MobilePayController {
         log.info("requestData: " + requestData);
         // 3.拼接请求头
         Map<String, String> headersMap = new HashMap<>();
-        headersMap.put("Authorization", PRVATE_SECRET);
+        headersMap.put("Authorization", PRIVATE_SECRET);
         // 4. 将请求参数转成map
         Map<String, String> requestMap = externalInfo2Map(requestData);
 
@@ -166,7 +166,7 @@ public class MobilePayController {
 
         // 3.拼接请求头
         Map<String, String> headersMap = new HashMap<>();
-        headersMap.put("Authorization", PRVATE_SECRET);
+        headersMap.put("Authorization", PRIVATE_SECRET);
         headersMap.put("Content-Type", "application/json");
 
         // 4. 请求moneyconnect server
