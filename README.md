@@ -16,7 +16,7 @@ First, you need a MoneyConnect account. [Register now](https://portal.moneycolle
 ```
 //Your account PUBLIC_SECRET("Bearer "+PUBLIC_SECRET)
 private static final String PUBLIC_SECRET = "Bearer live_pu_OGJ0EidwEg4GjymEiRD7cUBk7IQIYmhwhJlUM****";
-//Your account PRIVATE_SECRET("Bearer "+PRVATE_SECRET)
+//Your account PRIVATE_SECRET("Bearer "+PRIVATE_SECRET)
 private static final String PRIVATE_SECRET = "Bearer live_pr_OGJ0EidwEg4GjymEiRD4MRxBCo0OumdH6URv****";
 ```
 代码中公钥和私钥格式是（"Bearer "+PUBLIC_SECRET）
