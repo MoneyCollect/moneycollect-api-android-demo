@@ -1,0 +1,490 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.moneycollect.payment",
+    "module": "android_mc",
+    "version": "0.0.2",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "6.7.1",
+      "buildId": "oc5drlgitzgvnpgvwhqf26d6va"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.5.0"
+          }
+        },
+        {
+          "group": "com.google.android.material",
+          "module": "material",
+          "version": {
+            "requires": "1.4.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.4.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-reflect",
+          "version": {
+            "requires": "1.5.10"
+          }
+        },
+        {
+          "group": "androidx.appcompat",
+          "module": "appcompat",
+          "version": {
+            "requires": "1.3.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-android",
+          "version": {
+            "requires": "1.4.1"
+          }
+        },
+        {
+          "group": "io.reactivex.rxjava2",
+          "module": "rxjava",
+          "version": {
+            "requires": "2.2.9"
+          }
+        },
+        {
+          "group": "io.reactivex.rxjava2",
+          "module": "rxandroid",
+          "version": {
+            "requires": "2.1.0"
+          }
+        },
+        {
+          "group": "com.trello.rxlifecycle3",
+          "module": "rxlifecycle",
+          "version": {
+            "requires": "3.0.0"
+          }
+        },
+        {
+          "group": "com.trello.rxlifecycle3",
+          "module": "rxlifecycle-android",
+          "version": {
+            "requires": "3.0.0"
+          }
+        },
+        {
+          "group": "com.trello.rxlifecycle3",
+          "module": "rxlifecycle-components",
+          "version": {
+            "requires": "3.0.0"
+          }
+        },
+        {
+          "group": "org.koin",
+          "module": "koin-androidx-scope",
+          "version": {
+            "requires": "2.1.5"
+          }
+        },
+        {
+          "group": "org.koin",
+          "module": "koin-androidx-viewmodel",
+          "version": {
+            "requires": "2.1.5"
+          }
+        },
+        {
+          "group": "org.koin",
+          "module": "koin-androidx-fragment",
+          "version": {
+            "requires": "2.1.5"
+          }
+        },
+        {
+          "group": "com.squareup.okhttp3",
+          "module": "okhttp",
+          "version": {
+            "requires": "4.9.0"
+          }
+        },
+        {
+          "group": "com.squareup.okhttp3",
+          "module": "logging-interceptor",
+          "version": {
+            "requires": "4.9.0"
+          }
+        },
+        {
+          "group": "com.squareup.retrofit2",
+          "module": "retrofit",
+          "version": {
+            "requires": "2.9.0"
+          }
+        },
+        {
+          "group": "com.squareup.retrofit2",
+          "module": "converter-gson",
+          "version": {
+            "requires": "2.9.0"
+          }
+        },
+        {
+          "group": "com.squareup.retrofit2",
+          "module": "converter-scalars",
+          "version": {
+            "requires": "2.9.0"
+          }
+        },
+        {
+          "group": "com.squareup.retrofit2",
+          "module": "adapter-rxjava2",
+          "version": {
+            "requires": "2.9.0"
+          }
+        },
+        {
+          "group": "com.github.bumptech.glide",
+          "module": "glide",
+          "version": {
+            "requires": "4.11.0"
+          }
+        },
+        {
+          "group": "com.github.bumptech.glide",
+          "module": "compiler",
+          "version": {
+            "requires": "4.11.0"
+          }
+        },
+        {
+          "group": "jp.wasabeef",
+          "module": "glide-transformations",
+          "version": {
+            "requires": "4.3.0"
+          }
+        },
+        {
+          "group": "com.google.code.gson",
+          "module": "gson",
+          "version": {
+            "requires": "2.8.5"
+          }
+        },
+        {
+          "group": "com.google.android.material",
+          "module": "material",
+          "version": {
+            "requires": "1.3.0"
+          }
+        },
+        {
+          "group": "com.tencent.sonic",
+          "module": "sdk",
+          "version": {
+            "requires": "3.1.0"
+          }
+        },
+        {
+          "group": "androidx.databinding",
+          "module": "viewbinding",
+          "version": {
+            "requires": "4.1.3"
+          }
+        },
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-common",
+          "version": {
+            "requires": "4.1.3"
+          }
+        },
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-runtime",
+          "version": {
+            "requires": "4.1.3"
+          }
+        },
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-adapters",
+          "version": {
+            "requires": "4.1.3"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "android_mc-0.0.2.aar",
+          "url": "android_mc-0.0.2.aar",
+          "size": 1314371,
+          "sha512": "8fc4a29cb69ef6b2649b6cf4389a40e545db771fe3941f092c23fe7c14e65f9feed5161edbbb872b6872498fe97ac1ac34ca2f92d44aaadf64d53c2da1b69d99",
+          "sha256": "3aac1215c214714d7fce1ad5bb52365a69b74e8a03e62d443fee96bb878163d6",
+          "sha1": "32021068abad6e07306cb95bdb28b2f569762c78",
+          "md5": "44203b8c5185494aa30c753976e042cb"
+        }
+      ]
+    },
+    {
+      "name": "releaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.5.0"
+          }
+        },
+        {
+          "group": "com.google.android.material",
+          "module": "material",
+          "version": {
+            "requires": "1.4.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.4.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-reflect",
+          "version": {
+            "requires": "1.5.10"
+          }
+        },
+        {
+          "group": "androidx.appcompat",
+          "module": "appcompat",
+          "version": {
+            "requires": "1.3.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-android",
+          "version": {
+            "requires": "1.4.1"
+          }
+        },
+        {
+          "group": "io.reactivex.rxjava2",
+          "module": "rxjava",
+          "version": {
+            "requires": "2.2.9"
+          }
+        },
+        {
+          "group": "io.reactivex.rxjava2",
+          "module": "rxandroid",
+          "version": {
+            "requires": "2.1.0"
+          }
+        },
+        {
+          "group": "com.trello.rxlifecycle3",
+          "module": "rxlifecycle",
+          "version": {
+            "requires": "3.0.0"
+          }
+        },
+        {
+          "group": "com.trello.rxlifecycle3",
+          "module": "rxlifecycle-android",
+          "version": {
+            "requires": "3.0.0"
+          }
+        },
+        {
+          "group": "com.trello.rxlifecycle3",
+          "module": "rxlifecycle-components",
+          "version": {
+            "requires": "3.0.0"
+          }
+        },
+        {
+          "group": "org.koin",
+          "module": "koin-androidx-scope",
+          "version": {
+            "requires": "2.1.5"
+          }
+        },
+        {
+          "group": "org.koin",
+          "module": "koin-androidx-viewmodel",
+          "version": {
+            "requires": "2.1.5"
+          }
+        },
+        {
+          "group": "org.koin",
+          "module": "koin-androidx-fragment",
+          "version": {
+            "requires": "2.1.5"
+          }
+        },
+        {
+          "group": "com.squareup.okhttp3",
+          "module": "okhttp",
+          "version": {
+            "requires": "4.9.0"
+          }
+        },
+        {
+          "group": "com.squareup.okhttp3",
+          "module": "logging-interceptor",
+          "version": {
+            "requires": "4.9.0"
+          }
+        },
+        {
+          "group": "com.squareup.retrofit2",
+          "module": "retrofit",
+          "version": {
+            "requires": "2.9.0"
+          }
+        },
+        {
+          "group": "com.squareup.retrofit2",
+          "module": "converter-gson",
+          "version": {
+            "requires": "2.9.0"
+          }
+        },
+        {
+          "group": "com.squareup.retrofit2",
+          "module": "converter-scalars",
+          "version": {
+            "requires": "2.9.0"
+          }
+        },
+        {
+          "group": "com.squareup.retrofit2",
+          "module": "adapter-rxjava2",
+          "version": {
+            "requires": "2.9.0"
+          }
+        },
+        {
+          "group": "com.github.bumptech.glide",
+          "module": "glide",
+          "version": {
+            "requires": "4.11.0"
+          }
+        },
+        {
+          "group": "com.github.bumptech.glide",
+          "module": "compiler",
+          "version": {
+            "requires": "4.11.0"
+          }
+        },
+        {
+          "group": "jp.wasabeef",
+          "module": "glide-transformations",
+          "version": {
+            "requires": "4.3.0"
+          }
+        },
+        {
+          "group": "com.google.code.gson",
+          "module": "gson",
+          "version": {
+            "requires": "2.8.5"
+          }
+        },
+        {
+          "group": "com.google.android.material",
+          "module": "material",
+          "version": {
+            "requires": "1.3.0"
+          }
+        },
+        {
+          "group": "com.tencent.sonic",
+          "module": "sdk",
+          "version": {
+            "requires": "3.1.0"
+          }
+        },
+        {
+          "group": "androidx.databinding",
+          "module": "viewbinding",
+          "version": {
+            "requires": "4.1.3"
+          }
+        },
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-common",
+          "version": {
+            "requires": "4.1.3"
+          }
+        },
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-runtime",
+          "version": {
+            "requires": "4.1.3"
+          }
+        },
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-adapters",
+          "version": {
+            "requires": "4.1.3"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-parcelize-runtime",
+          "version": {
+            "requires": "1.5.10"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "android_mc-0.0.2.aar",
+          "url": "android_mc-0.0.2.aar",
+          "size": 1314371,
+          "sha512": "8fc4a29cb69ef6b2649b6cf4389a40e545db771fe3941f092c23fe7c14e65f9feed5161edbbb872b6872498fe97ac1ac34ca2f92d44aaadf64d53c2da1b69d99",
+          "sha256": "3aac1215c214714d7fce1ad5bb52365a69b74e8a03e62d443fee96bb878163d6",
+          "sha1": "32021068abad6e07306cb95bdb28b2f569762c78",
+          "md5": "44203b8c5185494aa30c753976e042cb"
+        }
+      ]
+    }
+  ]
+}
