@@ -9,15 +9,15 @@ import androidx.annotation.Nullable;
 import com.google.gson.Gson;
 import com.moneycollect.android.net.net.ApiResultCallback;
 import com.moneycollect.android.utils.MoneyCollectButtonUtils;
-import com.moneycollect.example.R;
-import com.moneycollect.example.databinding.ActivitySelectPaymentMethodListLayoutBinding;
+import com.moneycollect.example_java.R;
+import com.moneycollect.example_java.databinding.ActivitySelectPaymentMethodListLayoutBinding;
 import com.moneycollect.example_java.BaseExampleActivity;
 import com.moneycollect.example_java.TestRequestData;
 import com.moneycollect.example_java.utils.TempUtils;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * [SelectCustomerPaymentMethodListActivity] show retrieve the payment list
+ * {@link SelectCustomerPaymentMethodListActivity} show retrieve the payment list
  */
 public class SelectCustomerPaymentMethodListActivity extends BaseExampleActivity implements View.OnClickListener{
 

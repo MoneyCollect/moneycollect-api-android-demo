@@ -22,7 +22,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.moneycollect.android.model.enumeration.MoneyCollectPaymentModel;
-import com.moneycollect.android.model.request.RequestConfirmPayment;
 import com.moneycollect.android.model.request.RequestCreatePayment;
 import com.moneycollect.android.model.request.RequestPaymentMethod;
 import com.moneycollect.android.model.response.Payment;
@@ -41,10 +40,10 @@ import java.util.List;
 
 import static com.moneycollect.example_java.Constant.CURRENT_PAYMENT_BUNDLE;
 
-public class PaymentSheetDemoActivity extends AppCompatActivity implements View.OnClickListener {
+public class PaymentLocalDemoActivity extends AppCompatActivity implements View.OnClickListener {
     private final static String TAG = "PaymentSheetDemoActivity_PaymentResult";
     // PaymentModel (PAY)
-    MoneyCollectPaymentModel currentPaymentModel = MoneyCollectPaymentModel.PAY;
+    MoneyCollectPaymentModel currentPaymentModel = MoneyCollectPaymentModel.PAY_LOCAL;
 
     // Current Currency Unit
     private String currencyUnit = TestRequestData.Companion.getCurrency();
@@ -152,22 +151,23 @@ public class PaymentSheetDemoActivity extends AppCompatActivity implements View.
                 if (v.getId() == R.id.back_icon || v.getId() == R.id.payment_cancel_btn) {
                     finish();
                 } else if (v.getId() == R.id.payment_checkout_btn) {
-                    Intent intent = new Intent(this, PayCardActivity.class);
+                    Intent intent = new Intent(this, LocalPaymentActivity.class);
                     Bundle bundle = new Bundle();
                     RequestCreatePayment testRequestPayment = TestRequestData.Companion.getTestRequestPayment();
-                    RequestConfirmPayment testConfirmPayment = TestRequestData.Companion.getTestConfirmPayment();
+
                     String customerId = TestRequestData.Companion.getCustomerId();
                     RequestPaymentMethod testRaymentMethod = TestRequestData.Companion.getTestRequestPaymentMethod();
                     testRequestPayment.setLineItems(formatlineItems((ArrayList<PaymentSheetDemoAdapter.Item>) checkedItem));
+
                     BigDecimal numamount = new BigDecimal(
                             (viewBinding.paymentCheckoutAmount.getText().toString()).replace(
-                                    CurrencyUtils.getCurrencyUnitTag(currencyUnit, PaymentSheetDemoActivity.this),
+                                    CurrencyUtils.getCurrencyUnitTag(currencyUnit, PaymentLocalDemoActivity.this),
                                     ""
                             ));
                     BigDecimal numUnit = CurrencyUtils.getCurrencyTransnum(currencyUnit);
                     BigDecimal amount = numamount.multiply(numUnit);
                     testRequestPayment.setAmount(amount.toBigInteger());
-                    testConfirmPayment.setAmount(amount.toBigInteger());
+
                     //pass currentPaymentModel
                     bundle.putSerializable(
                             Constant.CURRENT_PAYMENT_MODEL,
@@ -178,11 +178,7 @@ public class PaymentSheetDemoActivity extends AppCompatActivity implements View.
                             Constant.CREATE_PAYMENT_REQUEST_TAG,
                             testRequestPayment
                     );
-                    //pass RequestConfirmPayment
-                    bundle.putParcelable(
-                            Constant.CONFIRM_PAYMENT_REQUEST_TAG,
-                            testConfirmPayment
-                    );
+
                     //pass currentId
                     bundle.putString(
                             Constant.CUSTOMER_ID_TAG,
@@ -190,8 +186,7 @@ public class PaymentSheetDemoActivity extends AppCompatActivity implements View.
                     );
                     //pass RequestPaymentMethod
                     bundle.putParcelable(Constant.CREATE_PAYMENT_METHOD_REQUEST_TAG, testRaymentMethod);
-                    //pass default supportBankList
-                    bundle.putSerializable(Constant.SUPPORT_BANK_LIST_TAG, TestRequestData.Companion.getTestBankIvList());
+
                     intent.putExtra(CURRENT_PAYMENT_BUNDLE, bundle);
                     startActivityLauncher.launch(intent);
                 }
@@ -200,7 +195,7 @@ public class PaymentSheetDemoActivity extends AppCompatActivity implements View.
     }
 
     private ActivityResultLauncher<Intent> startActivityLauncher =
-            PaymentSheetDemoActivity.this.registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+            PaymentLocalDemoActivity.this.registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
                 @SuppressLint("LongLogTag")
                 @Override
                 public void onActivityResult(ActivityResult result) {
@@ -242,11 +237,11 @@ public class PaymentSheetDemoActivity extends AppCompatActivity implements View.
 
         private List<Item> items = new ArrayList<>();
 
-        private PaymentSheetDemoActivity activity;
+        private PaymentLocalDemoActivity activity;
 
         private IKotlinItemClickListener itemClickListener;
 
-        public PaymentSheetDemoAdapter(PaymentSheetDemoActivity activity) {
+        public PaymentSheetDemoAdapter(PaymentLocalDemoActivity activity) {
             this.activity = activity;
             initList();
         }
@@ -298,7 +293,7 @@ public class PaymentSheetDemoActivity extends AppCompatActivity implements View.
         }
 
         @Override
-        public void onBindViewHolder(@NonNull PaymentSheetDemoViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull PaymentSheetDemoViewHolder holder, @SuppressLint("RecyclerView") int position) {
             holder.iconIv.setImageResource(items.get(position).images);
             holder.nameTv.setText(items.get(position).name);
             holder.priceTv.setText(CurrencyUtils.getCurrencyUnitTag(activity.currencyUnit, activity) + CurrencyUtils.getAmountTransferNum(activity.currencyUnit,items.get(position).amount));

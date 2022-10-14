@@ -67,18 +67,18 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingLeft="14dp"
-        android:paddingTop="16dp"
         android:background="@color/white"
-        android:paddingRight="14dp"
-        android:paddingBottom="28dp"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/size_14dp"
+        android:paddingTop="@dimen/size_16dp"
+        android:paddingBottom="@dimen/size_20dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <TextView
+            android:id="@+id/cart_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/paymentsheet_your_cart"
@@ -89,66 +89,94 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/sheet_expanded_menu_rl"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_marginRight="@dimen/size_14dp"
+            android:layout_below="@+id/cart_title"
             android:padding="@dimen/size_8dp" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size_2dp"
-            android:layout_marginTop="@dimen/size_20dp"
-            android:layout_marginBottom="@dimen/size_20dp"
-            android:background="@color/color_e6eaee" />
+
+        <TextView
+            android:id="@+id/select_payment_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/paymentsheet_select_payment"
+            android:textColor="#333333"
+            android:layout_below="@+id/sheet_expanded_menu_rl"
+            android:layout_marginTop="@dimen/size_10dp"
+            android:textSize="@dimen/size_18dp"
+            android:textStyle="bold" />
+
 
         <LinearLayout
+            android:id="@+id/bottom_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_alignParentBottom="true"
+            android:paddingRight="@dimen/size_14dp"
+            android:orientation="vertical">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_1dp"
+                android:layout_marginTop="@dimen/size_10dp"
+                android:layout_marginBottom="@dimen/size_10dp"
+                android:background="@color/color_e6eaee" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical|left"
-                android:text="@string/paymentsheet_total"
-                android:textColor="#333333"
-                android:textSize="@dimen/size_18dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/payment_checkout_amount"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical|right"
-                android:text="@string/paymentsheet_total_amount"
-                android:textColor="#333333"
-                android:textSize="@dimen/size_18dp"
-                android:textStyle="bold" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|left"
+                    android:text="@string/paymentsheet_total"
+                    android:textColor="#333333"
+                    android:textSize="@dimen/size_18dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/payment_checkout_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|right"
+                    android:text="@string/paymentsheet_total_amount"
+                    android:textColor="#333333"
+                    android:textSize="@dimen/size_18dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/payment_error_message_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_9dp"
+                android:layout_marginRight="@dimen/size_16dp"
+                android:textSize="@dimen/text_size_12sp"
+                android:lineSpacingExtra="@dimen/size_2dp"
+                android:textColor="@color/mc_color_payment_error_red"/>
+
+            <com.moneycollect.android.ui.view.MoneyCollectButtonView
+                android:id="@+id/payment_checkout_btn"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_20dp"
+                app:button_height="@dimen/size_56dp"/>
+
         </LinearLayout>
 
-        <Button
-            android:id="@+id/payment_checkout_btn"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/select_payment_rl"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_56dp"
-            android:layout_marginTop="21dp"
-            android:background="@drawable/mc_payment_bg_r8_shadow1_black"
-            android:text="@string/paymentsheet_checkout"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:textAllCaps="false"
-            android:visibility="visible" />
-
-        <Button
-            android:id="@+id/payment_cancel_btn"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size_56dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="@dimen/size_10dp"
-            android:background="@drawable/payment_bg_r8_shadow1_darkblue"
-            android:text="@string/paymentsheet_cancel"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:textAllCaps="false"
-            android:visibility="visible" />
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/select_payment_title"
+            android:layout_above="@+id/bottom_container"
+            android:scrollbars="vertical"
+            android:fadeScrollbars="false"
+            android:scrollbarThumbVertical="@drawable/mc_expand_scroller_thumb_bg"
+            android:padding="@dimen/size_8dp" />
+    </RelativeLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

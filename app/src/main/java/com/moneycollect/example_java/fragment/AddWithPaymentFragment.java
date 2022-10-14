@@ -1,9 +1,9 @@
 package com.moneycollect.example_java.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,12 +28,12 @@ import com.moneycollect.android.model.response.PaymentMethod;
 import com.moneycollect.android.net.net.ApiResultCallback;
 import com.moneycollect.android.ui.imp.MoneyCollectResultBackInterface;
 import com.moneycollect.android.ui.view.MoneyCollectContentView;
-import com.moneycollect.example.R;
-import com.moneycollect.example.databinding.FragmentAddpaymentLayoutBinding;
+import com.moneycollect.example_java.R;
+import com.moneycollect.example_java.databinding.FragmentAddpaymentLayoutBinding;
 import com.moneycollect.example_java.BaseExampleFragment;
 import com.moneycollect.example_java.Constant;
+import com.moneycollect.example_java.TestRequestData;
 import com.moneycollect.example_java.activity.PayCardActivity;
-import com.moneycollect.example_java.activity.PaymentSheetCustomDemoActivity;
 import com.moneycollect.example_java.activity.ValidationWebActivity;
 import com.moneycollect.example_java.utils.TempUtils;
 
@@ -47,7 +47,7 @@ import static com.moneycollect.android.model.enumeration.MoneyCollectContentStyl
 import static com.moneycollect.android.model.enumeration.MoneyCollectContentStyleCheck.SUCCESS;
 
 /**
- * [AddWithPaymentFragment]
+ * {@link AddWithPaymentFragment}
  * If you add the card is not set in the future use will only payment,otherwise provide pay for use in the future.
  */
 public class AddWithPaymentFragment extends BaseExampleFragment implements View.OnClickListener {
@@ -120,7 +120,7 @@ public class AddWithPaymentFragment extends BaseExampleFragment implements View.
         if (getActivity() != null) {
             moneyCollectContentView.getContentResultParamsLiveData().observe(getActivity(),
                     result -> {
-                        if (result.getStatus() != null) {
+                        if (result!=null && result.getStatus() != null) {
                             if (result.getStatus().equals(SUCCESS)) {
                                 dealData(result);
                             } else if (result.getStatus().equals(FAULT)) {
@@ -197,15 +197,19 @@ public class AddWithPaymentFragment extends BaseExampleFragment implements View.
         }
         if (currentRequestCreatePayment != null) {
             RequestCreatePayment requestCreatePayment = new RequestCreatePayment(
+                    currentRequestCreatePayment.getAutomaticPaymentMethods(),
                     currentRequestCreatePayment.getAmount(),
+                    false,
                     currentRequestCreatePayment.getConfirmationMethod(),
                     currentRequestCreatePayment.getCurrency(),
                     currentRequestCreatePayment.getCustomerId(),
                     currentRequestCreatePayment.getDescription(),
+                    currentRequestCreatePayment.getFromChannel(),
                     currentRequestCreatePayment.getIp(),
                     currentRequestCreatePayment.getNotifyUrl(),
                     currentRequestCreatePayment.getOrderNo(),
                     paymentMethod.id,
+                    TestRequestData.Companion.getPaymentMethodTypes(),
                     currentRequestCreatePayment.getPreAuth(),
                     currentRequestCreatePayment.getReceiptEmail(),
                     currentRequestCreatePayment.getReturnUrl(),
@@ -219,6 +223,7 @@ public class AddWithPaymentFragment extends BaseExampleFragment implements View.
                     currentRequestCreatePayment.getLineItems(),
                     currentRequestCreatePayment.getStatementDescriptor(),
                     currentRequestCreatePayment.getStatementDescriptorSuffix(),
+                    currentRequestCreatePayment.getUserAgent(),
                     currentRequestCreatePayment.getWebsite()
             );
             if (requestCreatePayment.getConfirmationMethod() == RequestCreatePayment.ConfirmationMethod.Automatic) {
@@ -282,30 +287,30 @@ public class AddWithPaymentFragment extends BaseExampleFragment implements View.
 
             moneyCollect.confirmPayment(requestConfirmPayment, payment.getClientSecret(), new ApiResultCallback<Payment>() {
                         @Override
-                        public void onSuccess(@NotNull Payment payment) {
-                            if (payment.getNextAction() != null) {
-                                String redirectToUrl = payment.getNextAction().redirectToUrl;
+                        public void onSuccess(@NotNull Payment result) {
+                            if (result.getNextAction() != null) {
+                                String redirectToUrl = result.getNextAction().redirectToUrl;
                                 if (!TextUtils.isEmpty(redirectToUrl)) {
                                     Intent intent = new Intent(getActivity(), ValidationWebActivity.class);
                                     intent.putExtra(Constant.VALIDATION_PARAM_URL, redirectToUrl);
-                                    intent.putExtra(Constant.VALIDATION_PAYMENT_ID, payment.getId());
-                                    intent.putExtra(Constant.VALIDATION_PAYMENT_CLIENTSECRET, payment.getClientSecret());
+                                    intent.putExtra(Constant.VALIDATION_PAYMENT_ID, result.getId());
+                                    intent.putExtra(Constant.VALIDATION_PAYMENT_CLIENTSECRET, result.getClientSecret());
                                     startActivityLauncher.launch(intent);
                                 } else {
                                     moneyCollectResultBackInterface.paymentConfirmResultBack(false, Constant.PAYMENT_PENDING_MESSAGE);
                                 }
                             } else {
-                                String status = payment.getStatus();
+                                String status = result.getStatus();
                                 if (status != null) {
                                     switch (status) {
                                         case Constant.PAYMENT_SUCCEEDED:
                                             Intent intent = new Intent();
-                                            intent.putExtra(Constant.PAYMENT_RESULT_PAYMENT, payment);
+                                            intent.putExtra(Constant.PAYMENT_RESULT_PAYMENT, result);
                                             getActivity().setResult(Constant.PAYMENT_RESULT_CODE, intent);
                                             moneyCollectResultBackInterface.paymentConfirmResultBack(true, "");
                                             break;
                                         case Constant.PAYMENT_FAILED:
-                                            moneyCollectResultBackInterface.paymentConfirmResultBack(false, payment.getErrorMessage());
+                                            moneyCollectResultBackInterface.paymentConfirmResultBack(false, result.getErrorMessage());
                                             break;
                                         case Constant.PAYMENT_UN_CAPTURED:
                                             moneyCollectResultBackInterface.paymentConfirmResultBack(false, Constant.PAYMENT_UN_CAPTURED_MESSAGE);
@@ -339,18 +344,21 @@ public class AddWithPaymentFragment extends BaseExampleFragment implements View.
             new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == Constant.WEB_RESULT_CODE) {
+                    if (result != null && result.getResultCode() == Constant.WEB_RESULT_CODE) {
                         String resultStr = "";
-                        if (result.getData() != null) {
-                            resultStr = result.getData().getStringExtra(Constant.WEB_RESULT_TAG);
+                        Intent dataIntent = result.getData();
+                        Payment payment = null;
+                        if (dataIntent != null) {
+                            resultStr = dataIntent.getStringExtra(Constant.WEB_RESULT_TAG);
+                            payment = dataIntent.getParcelableExtra(Constant.PAYMENT_RESULT_PAYMENT);
                         }
-                        Payment payment =
-                                result.getData().getParcelableExtra(Constant.PAYMENT_RESULT_PAYMENT);
                         if (TextUtils.isEmpty(resultStr)) {
                             Intent intent = new Intent();
                             intent.putExtra(Constant.WEB_RESULT_TAG, resultStr);
                             intent.putExtra(Constant.PAYMENT_RESULT_PAYMENT, payment);
-                            getActivity().setResult(Constant.PAYMENT_RESULT_CODE, intent);
+                            if (getActivity()!=null) {
+                                getActivity().setResult(Constant.PAYMENT_RESULT_CODE, intent);
+                            }
                             moneyCollectResultBackInterface.paymentConfirmResultBack(true, "");
                         } else {
                             moneyCollectResultBackInterface.failExceptionBack(resultStr);
@@ -366,11 +374,12 @@ public class AddWithPaymentFragment extends BaseExampleFragment implements View.
      */
     @Override
     public void onClick(View view) {
-        if (view != null) {
+        Activity activity = getActivity();
+        if (view != null && activity != null) {
             if (view.getId() == moneyCollectContentView.getToolbarBackIcon().getId() && !moneyCollectContentView.isRequestLoading()) {
-                TempUtils.hideKeyboard(getActivity());
-                if (getActivity() instanceof PayCardActivity) {
-                    ((PayCardActivity) getActivity()).switchContent(SAVE_PAYMENT);
+                TempUtils.hideKeyboard(activity);
+                if (activity instanceof PayCardActivity) {
+                    ((PayCardActivity)activity).switchContent(SAVE_PAYMENT);
                 }
             }
         }

@@ -1,4 +1,4 @@
-package com.moneycollect.example
+package com.moneycollect.example_java
 
 import org.junit.Test
 

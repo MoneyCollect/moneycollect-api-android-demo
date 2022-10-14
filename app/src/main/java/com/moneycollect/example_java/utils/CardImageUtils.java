@@ -4,7 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.widget.ImageView;
 
-import com.moneycollect.example.R;
+import com.moneycollect.example_java.R;
 
 public class CardImageUtils {
     @SuppressLint("UseCompatLoadingForDrawables")

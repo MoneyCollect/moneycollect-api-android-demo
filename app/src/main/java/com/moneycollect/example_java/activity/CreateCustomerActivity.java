@@ -15,8 +15,8 @@ import com.moneycollect.android.model.request.RequestCreateCustomer;
 import com.moneycollect.android.model.response.Customer;
 import com.moneycollect.android.net.net.ApiResultCallback;
 import com.moneycollect.android.ui.view.MoneyCollectContentView;
-import com.moneycollect.example.R;
-import com.moneycollect.example.databinding.ActivityCreateCustomerLayoutBinding;
+import com.moneycollect.example_java.R;
+import com.moneycollect.example_java.databinding.ActivityCreateCustomerLayoutBinding;
 import com.moneycollect.example_java.BaseExampleActivity;
 import com.moneycollect.example_java.TestRequestData;
 import com.moneycollect.example_java.utils.TempUtils;
@@ -27,7 +27,7 @@ import static com.moneycollect.android.model.enumeration.MoneyCollectContentStyl
 import static com.moneycollect.android.model.enumeration.MoneyCollectContentStyleCheck.SUCCESS;
 
 /**
- * [CreateCustomerActivity] show create customer sample
+ * {@link CreateCustomerActivity} show create customer sample
  */
 public class CreateCustomerActivity extends BaseExampleActivity {
 
@@ -60,7 +60,7 @@ public class CreateCustomerActivity extends BaseExampleActivity {
         moneyCollectContentView.setMoneyCollectContentViewParams(moneyCollectContentViewParamsBuilder.build());
 
         moneyCollectContentView.getContentResultParamsLiveData().observe(this, result -> {
-            if (result.getStatus() != null) {
+            if (result!=null && result.getStatus() != null) {
                 if (result.getStatus().equals(SUCCESS)) {
                     RequestCreateCustomer requestCreateCustomer = new RequestCreateCustomer(
                             TestRequestData.Companion.getAddress(),

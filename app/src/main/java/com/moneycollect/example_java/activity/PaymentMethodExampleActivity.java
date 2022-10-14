@@ -19,8 +19,8 @@ import com.moneycollect.android.model.response.PaymentMethod;
 import com.moneycollect.android.net.net.ApiResultCallback;
 import com.moneycollect.android.ui.view.MoneyCollectContentView;
 import com.moneycollect.android.utils.MoneyCollectButtonUtils;
-import com.moneycollect.example.R;
-import com.moneycollect.example.databinding.ActivityCreateAPaymentMethodBinding;
+import com.moneycollect.example_java.R;
+import com.moneycollect.example_java.databinding.ActivityCreateAPaymentMethodBinding;
 import com.moneycollect.example_java.BaseExampleActivity;
 import com.moneycollect.example_java.TestRequestData;
 import com.moneycollect.example_java.utils.TempUtils;
@@ -31,7 +31,7 @@ import static com.moneycollect.android.model.enumeration.MoneyCollectContentStyl
 import static com.moneycollect.android.model.enumeration.MoneyCollectContentStyleCheck.SUCCESS;
 
 /**
- * [PaymentMethodExampleActivity] show create PaymentMethod、retrieve PaymentMethod and attach PaymentMethod  sample
+ * {@link PaymentMethodExampleActivity} show create {@link PaymentMethod}、retrieve PaymentMethod and attach PaymentMethod  sample
  */
 public class PaymentMethodExampleActivity extends BaseExampleActivity implements View.OnClickListener {
 
@@ -103,7 +103,7 @@ public class PaymentMethodExampleActivity extends BaseExampleActivity implements
 
         //data of moneyCollectContentView
         moneyCollectContentView.getContentResultParamsLiveData().observe(this, result -> {
-            if (result.getStatus() != null) {
+            if (result!=null && result.getStatus() != null) {
                 if (result.getStatus().equals(SUCCESS)) {
                     RequestPaymentMethod requestPaymentMethod = new RequestPaymentMethod(
                             "card",
@@ -153,8 +153,8 @@ public class PaymentMethodExampleActivity extends BaseExampleActivity implements
                         dismissLoadingDialog();
                         resultTag.setText(R.string.create_payment_method_success_str);
                         resultTv.setText(TempUtils.formatString(new Gson().toJson(result)));
-                        paymentMethodId = result.id;
                         if (result != null && result.id != null) {
+                            paymentMethodId = result.id;
                             //refresh TestRequestData data
                             TestRequestData.Companion.setPaymentId(result.id);
                             TestRequestData.Companion.getTestRequestPayment().setPaymentMethod(result.id);

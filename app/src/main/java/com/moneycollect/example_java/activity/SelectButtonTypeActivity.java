@@ -13,12 +13,12 @@ import com.moneycollect.android.model.MoneyCollectButtonViewParams;
 import com.moneycollect.android.model.enumeration.MoneyCollectPaymentModel;
 import com.moneycollect.android.ui.view.MoneyCollectButtonView;
 import com.moneycollect.android.utils.MoneyCollectButtonUtils;
-import com.moneycollect.example.R;
-import com.moneycollect.example.databinding.ActivitySelectButtonTypeLayoutBinding;
+import com.moneycollect.example_java.R;
+import com.moneycollect.example_java.databinding.ActivitySelectButtonTypeLayoutBinding;
 import com.moneycollect.example_java.BaseExampleActivity;
 
 /**
- * [SelectButtonTypeActivity] show the use of  MoneyCollectButtonView
+ * {@link SelectButtonTypeActivity} show the use of  {@link MoneyCollectButtonView}
  */
 public class SelectButtonTypeActivity extends BaseExampleActivity implements View.OnClickListener{
 
@@ -73,7 +73,10 @@ public class SelectButtonTypeActivity extends BaseExampleActivity implements Vie
                 .build();
         buttonWidget.setMoneyCollectButtonViewParams(params);
 
-        buttonWidget.getCardConfirmButton().setOnClickListener(this);  //set button onClick
+        if (buttonWidget.getCardConfirmButton()!=null) {
+            //set button onClick
+            buttonWidget.getCardConfirmButton().setOnClickListener(this);
+        }
     }
 
     /**
@@ -83,7 +86,7 @@ public class SelectButtonTypeActivity extends BaseExampleActivity implements Vie
     public void onClick(View view) {
         if (view!=null) {
             if (!MoneyCollectButtonUtils.INSTANCE.isFastDoubleClick(view.getId(), 800)) {
-                if (view.getId() == buttonWidget.getCardConfirmButton().getId()){
+                if (buttonWidget.getCardConfirmButton()!=null && view.getId() == buttonWidget.getCardConfirmButton().getId()){
                     isLoadingAnimStatus=true;
                     buttonWidget.setMoneyCollectButtonViewContext(this);
                     buttonWidget.setMoneyCollectButtonViewModel(moneyCollectPaymentModel);
@@ -152,6 +155,9 @@ public class SelectButtonTypeActivity extends BaseExampleActivity implements Vie
 
             }
         });
-        buttonWidget.getCardConfirmButton().startAnimation(animation);
+
+        if (buttonWidget.getCardConfirmButton()!=null) {
+            buttonWidget.getCardConfirmButton().startAnimation(animation);
+        }
     }
 }

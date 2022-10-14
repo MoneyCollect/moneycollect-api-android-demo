@@ -8,7 +8,8 @@ public class ExampleApplication extends Application {
 
     @Override
     public void onCreate() {
-        MoneyCollectSdk.init(this, "test_pu_1sWrsjQP9PJiCwGsYv3risSn8YBCIEMNoVFIo8eR6s","http://192.168.2.100:9898/");
+        //init MoneyCollectSdk
+       MoneyCollectSdk.init(this, "live_pr_97pxAhtkXCgm8Dd08L3NNTfV23hWRno9D9XZc9KnlK4","https://api.moneycollect.com")
         super.onCreate();
     }
 }

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="62dp"
+    android:descendantFocusability="blocksDescendants"
+    android:paddingLeft="@dimen/size_14dp">
+
+
+    <ImageView
+        android:id="@+id/layout_adapter_child_cardiv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="@dimen/size_10dp"
+        android:layout_marginBottom="@dimen/size_1dp"
+        app:layout_constraintBottom_toTopOf="@id/layout_adapter_hintview1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"  />
+
+
+    <TextView
+        android:id="@+id/layout_adapter_child_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/size_20dp"
+        android:layout_marginBottom="@dimen/size_1dp"
+        android:gravity="center_vertical"
+        android:text="Visa ···· 1111"
+        android:textColor="#333333"
+        android:textSize="@dimen/text_size_17sp"
+        app:layout_constraintBottom_toTopOf="@id/layout_adapter_hintview1"
+        app:layout_constraintLeft_toRightOf="@id/layout_adapter_child_cardiv"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/layout_adapter_child_cb"
+        style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="@dimen/size_1dp"
+        android:layout_marginRight="@dimen/size_14dp"
+        android:clickable="false"
+        android:focusable="false"
+        android:scaleX="0.9"
+        android:scaleY="0.9"
+        app:layout_constraintBottom_toTopOf="@id/layout_adapter_hintview1"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/layout_adapter_hintview1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_1dp"
+        android:background="#ffefefef"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

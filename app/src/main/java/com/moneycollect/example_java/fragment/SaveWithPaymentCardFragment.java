@@ -1,5 +1,6 @@
 package com.moneycollect.example_java.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -22,10 +23,11 @@ import com.moneycollect.android.model.response.PaymentMethod;
 import com.moneycollect.android.net.net.ApiResultCallback;
 import com.moneycollect.android.ui.imp.MoneyCollectResultBackInterface;
 import com.moneycollect.android.ui.view.MoneyCollectCardListView;
-import com.moneycollect.example.R;
-import com.moneycollect.example.databinding.FragmentSaveWithPaymentLayoutBinding;
+import com.moneycollect.example_java.R;
+import com.moneycollect.example_java.databinding.FragmentSaveWithPaymentLayoutBinding;
 import com.moneycollect.example_java.BaseExampleFragment;
 import com.moneycollect.example_java.Constant;
+import com.moneycollect.example_java.TestRequestData;
 import com.moneycollect.example_java.activity.PayCardActivity;
 import com.moneycollect.example_java.activity.ValidationWebActivity;
 
@@ -35,8 +37,8 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 
 /**
- * [SaveWithPaymentCardFragment]
- * Show the payment list,offer users pay the payment, also you can add a new card to pay jump [AddWithPaymentFragment]
+ * {@link SaveWithPaymentCardFragment}
+ * Show the payment list,offer users pay the payment, also you can add a new card to pay jump {@link AddWithPaymentFragment}
  */
 public class SaveWithPaymentCardFragment extends BaseExampleFragment implements View.OnClickListener {
 
@@ -119,15 +121,19 @@ public class SaveWithPaymentCardFragment extends BaseExampleFragment implements 
             return;
         }
         RequestCreatePayment requestCreatePayment = new RequestCreatePayment(
+                currentRequestCreatePayment.getAutomaticPaymentMethods(),
                 currentRequestCreatePayment.getAmount(),
+                false,
                 currentRequestCreatePayment.getConfirmationMethod(),
                 currentRequestCreatePayment.getCurrency(),
                 currentRequestCreatePayment.getCustomerId(),
                 currentRequestCreatePayment.getDescription(),
+                currentRequestCreatePayment.getFromChannel(),
                 currentRequestCreatePayment.getIp(),
                 currentRequestCreatePayment.getNotifyUrl(),
                 currentRequestCreatePayment.getOrderNo(),
                 paymentMethod.id,
+                TestRequestData.Companion.getPaymentMethodTypes(),
                 currentRequestCreatePayment.getPreAuth(),
                 currentRequestCreatePayment.getReceiptEmail(),
                 currentRequestCreatePayment.getReturnUrl(),
@@ -141,6 +147,7 @@ public class SaveWithPaymentCardFragment extends BaseExampleFragment implements 
                 currentRequestCreatePayment.getLineItems(),
                 currentRequestCreatePayment.getStatementDescriptor(),
                 currentRequestCreatePayment.getStatementDescriptorSuffix(),
+                currentRequestCreatePayment.getUserAgent(),
                 currentRequestCreatePayment.getWebsite()
         );
 
@@ -153,7 +160,7 @@ public class SaveWithPaymentCardFragment extends BaseExampleFragment implements 
         moneyCollect.createPayment(requestCreatePayment, new ApiResultCallback<Payment>() {
             @Override
             public void onSuccess(@NotNull Payment result) {
-                confirmPayment(result, paymentMethod);
+                confirmPayment(result);
             }
 
             @Override
@@ -167,7 +174,7 @@ public class SaveWithPaymentCardFragment extends BaseExampleFragment implements 
     /**
      * confirm payment
      */
-    private void confirmPayment(Payment payment, PaymentMethod paymentMethod) {
+    private void confirmPayment(Payment payment) {
         if (currentRequestConfirmPayment == null) {
             moneyCollectResultBackInterface.failExceptionBack(getString(R.string.request_confirm_payment_empty_str));
             return;
@@ -204,29 +211,36 @@ public class SaveWithPaymentCardFragment extends BaseExampleFragment implements 
 
         moneyCollect.confirmPayment(requestConfirmPayment, payment.getClientSecret(), new ApiResultCallback<Payment>() {
                     @Override
-                    public void onSuccess(@NotNull Payment payment) {
-                        if (payment.getNextAction() != null) {
-                            String redirectToUrl = payment.getNextAction().redirectToUrl;
+                    public void onSuccess(@NotNull Payment result) {
+                        if (result==null){
+                            moneyCollectResultBackInterface.paymentConfirmResultBack(false, Constant.PAYMENT_PENDING_MESSAGE);
+                            return;
+                        }
+                        if (result.getNextAction() != null) {
+                            String redirectToUrl = result.getNextAction().redirectToUrl;
                             if (!TextUtils.isEmpty(redirectToUrl)) {
                                 Intent intent = new Intent(getActivity(), ValidationWebActivity.class);
                                 intent.putExtra(Constant.VALIDATION_PARAM_URL, redirectToUrl);
-                                intent.putExtra(Constant.VALIDATION_PAYMENT_ID, payment.getId());
+                                intent.putExtra(Constant.VALIDATION_PAYMENT_ID, result.getId());
+                                intent.putExtra(Constant.VALIDATION_PAYMENT_CLIENTSECRET, result.getClientSecret());
                                 startActivityLauncher.launch(intent);
                             } else {
                                 moneyCollectResultBackInterface.paymentConfirmResultBack(false, Constant.PAYMENT_PENDING_MESSAGE);
                             }
                         } else {
-                            String status = payment.getStatus();
+                            String status = result.getStatus();
                             if (status != null) {
                                 switch (status) {
                                     case Constant.PAYMENT_SUCCEEDED:
                                         Intent intent = new Intent();
-                                        intent.putExtra(Constant.PAYMENT_RESULT_PAYMENT, payment);
-                                        getActivity().setResult(Constant.PAYMENT_RESULT_CODE, intent);
+                                        intent.putExtra(Constant.PAYMENT_RESULT_PAYMENT, result);
+                                        if (getActivity()!=null) {
+                                            getActivity().setResult(Constant.PAYMENT_RESULT_CODE, intent);
+                                        }
                                         moneyCollectResultBackInterface.paymentConfirmResultBack(true, "");
                                         break;
                                     case Constant.PAYMENT_FAILED:
-                                        moneyCollectResultBackInterface.paymentConfirmResultBack(false, payment.getErrorMessage());
+                                        moneyCollectResultBackInterface.paymentConfirmResultBack(false, result.getErrorMessage());
                                         break;
                                     case Constant.PAYMENT_UN_CAPTURED:
                                         moneyCollectResultBackInterface.paymentConfirmResultBack(false, Constant.PAYMENT_UN_CAPTURED_MESSAGE);
@@ -263,16 +277,19 @@ public class SaveWithPaymentCardFragment extends BaseExampleFragment implements 
                     if (result == null) return;
                     if (result.getResultCode() == Constant.WEB_RESULT_CODE) {
                         String resultStr = "";
-                        if (result.getData() != null) {
-                            resultStr = result.getData().getStringExtra(Constant.WEB_RESULT_TAG);
+                        Intent dataIntent = result.getData();
+                        Payment payment = null;
+                        if (dataIntent != null) {
+                            resultStr = dataIntent.getStringExtra(Constant.WEB_RESULT_TAG);
+                            payment = dataIntent.getParcelableExtra(Constant.PAYMENT_RESULT_PAYMENT);
                         }
-                        Payment payment =
-                                result.getData().getParcelableExtra(Constant.PAYMENT_RESULT_PAYMENT);
                         if (TextUtils.isEmpty(resultStr)) {
                             Intent intent = new Intent();
                             intent.putExtra(Constant.WEB_RESULT_TAG, resultStr);
                             intent.putExtra(Constant.PAYMENT_RESULT_PAYMENT, payment);
-                            getActivity().setResult(Constant.PAYMENT_RESULT_CODE, intent);
+                            if (getActivity()!=null) {
+                                getActivity().setResult(Constant.PAYMENT_RESULT_CODE, intent);
+                            }
                             moneyCollectResultBackInterface.paymentConfirmResultBack(true, "");
                         } else {
                             moneyCollectResultBackInterface.failExceptionBack(resultStr);
@@ -334,12 +351,13 @@ public class SaveWithPaymentCardFragment extends BaseExampleFragment implements 
      */
     @Override
     public void onClick(View view) {
-        if (view != null) {
+        Activity activity = getActivity();
+        if (view != null && activity!=null) {
             if (view.getId() == cardListLayout.getToolbarBackIcon().getId() && !cardListLayout.isRequestLoading() && !isRequestLoading) {
-                getActivity().finish();
+                activity.finish();
             } else if (view.getId() == cardListLayout.getChildFootView().getId() && !cardListLayout.isRequestLoading() && !isRequestLoading) {
-                if (getActivity() instanceof PayCardActivity) {
-                    ((PayCardActivity) getActivity()).switchContent(ADD_PAYMENT);
+                if (activity instanceof PayCardActivity) {
+                    ((PayCardActivity)activity).switchContent(ADD_PAYMENT);
                 }
             }
         }

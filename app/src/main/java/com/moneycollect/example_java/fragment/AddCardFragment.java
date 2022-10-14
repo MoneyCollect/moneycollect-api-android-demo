@@ -1,5 +1,6 @@
 package com.moneycollect.example_java.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -19,8 +20,8 @@ import com.moneycollect.android.model.response.PaymentMethod;
 import com.moneycollect.android.net.net.ApiResultCallback;
 import com.moneycollect.android.ui.imp.MoneyCollectResultBackInterface;
 import com.moneycollect.android.ui.view.MoneyCollectContentView;
-import com.moneycollect.example.R;
-import com.moneycollect.example.databinding.FragmentAddpaymentLayoutBinding;
+import com.moneycollect.example_java.R;
+import com.moneycollect.example_java.databinding.FragmentAddpaymentLayoutBinding;
 import com.moneycollect.example_java.BaseExampleFragment;
 import com.moneycollect.android.model.enumeration.MoneyCollectPaymentModel;
 import com.moneycollect.example_java.Constant;
@@ -35,7 +36,7 @@ import java.util.List;
 import static com.moneycollect.android.model.enumeration.MoneyCollectContentStyleCheck.*;
 
 /**
- * [AddCardFragment]
+ * {@link AddCardFragment}
  * If you add the card is not set in the future use, will only call createPaymentMethod method and return a PaymentMethod,
  * otherwise create further calls after PaymentMethod attachPaymentMethod binding PaymentMethod provide pay for use in the future.
  */
@@ -78,11 +79,11 @@ public class AddCardFragment extends BaseExampleFragment implements View.OnClick
             currentModel = (MoneyCollectPaymentModel) getArguments().getSerializable(Constant.CURRENT_PAYMENT_MODEL);
             currentRequestCreatePaymentMethod = getArguments().getParcelable(Constant.CREATE_PAYMENT_METHOD_REQUEST_TAG);
             customerId = getArguments().getString(Constant.CUSTOMER_ID_TAG);
-            supportBankList= (ArrayList) getArguments().getSerializable(Constant.SUPPORT_BANK_LIST_TAG);
+            supportBankList = (ArrayList) getArguments().getSerializable(Constant.SUPPORT_BANK_LIST_TAG);
         }
 
         moneyCollectContentView= viewBinding.mcAddContentWidget;
-        moneyCollectResultBackInterface =moneyCollectContentView;
+        moneyCollectResultBackInterface = moneyCollectContentView.gainMoneyCollectResultBackInterface();
         MoneyCollectContentViewParams.Builder moneyCollectContentViewParamsBuilder = new MoneyCollectContentViewParams.Builder()
                 .activity(getActivity())
                 .moneyCollectPaymentModel(currentModel)
@@ -109,7 +110,7 @@ public class AddCardFragment extends BaseExampleFragment implements View.OnClick
         if (getActivity()!=null) {
             moneyCollectContentView.getContentResultParamsLiveData().observe(getActivity(),
                     result -> {
-                        if (result.getStatus() != null) {
+                        if (result!=null && result.getStatus() != null) {
                             if (result.getStatus().equals(SUCCESS)){
                                 dealData(result);
                             }else  if (result.getStatus().equals(FAULT)){
@@ -185,11 +186,12 @@ public class AddCardFragment extends BaseExampleFragment implements View.OnClick
      * return paymentMethod
      */
     private void resultBack(PaymentMethod paymentMethod){
-        if (getActivity()!=null) {
+        Activity activity = getActivity();
+        if (activity!=null) {
             Intent intent = new Intent();
             intent.putExtra(Constant.ADD_PAYMENT_METHOD, paymentMethod);
-            getActivity().setResult(Constant.ADD_RESULT_CODE, intent);
-            getActivity().finish();
+            activity.setResult(Constant.ADD_RESULT_CODE, intent);
+            activity.finish();
         }
     }
 
@@ -230,10 +232,11 @@ public class AddCardFragment extends BaseExampleFragment implements View.OnClick
      */
     @Override
     public void onClick(View view) {
-        if (view!=null) {
-            if (view.getId() == moneyCollectContentView.getToolbarBackIcon().getId() && moneyCollectContentView.isRequestLoading()==false) {
-                TempUtils.hideKeyboard(getActivity());
-                ((SaveCardActivity)getActivity()).switchContent(SAVE_PAYMENT);
+        Activity activity = getActivity();
+        if (view != null && activity!=null) {
+            if (view.getId() == moneyCollectContentView.getToolbarBackIcon().getId() && !moneyCollectContentView.isRequestLoading()) {
+                TempUtils.hideKeyboard(activity);
+                ((SaveCardActivity)activity).switchContent(SAVE_PAYMENT);
             }
         }
     }

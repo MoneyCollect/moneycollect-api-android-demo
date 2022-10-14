@@ -4,6 +4,7 @@ buildscript {
     repositories {
         mavenCentral()
         google()
+        jcenter()
         maven { url 'https://jitpack.io' }
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/google' }
@@ -22,7 +23,13 @@ allprojects {
         mavenCentral()
         jcenter() // Warning: this repository is going to shut down soon
         maven { url "https://jitpack.io" }
-        maven{ url "https://raw.githubusercontent.com/MoneyCollect/moneycollect-api-android-demo/mcsdk" }
+        maven{
+            url "https://raw.githubusercontent.com/MoneyCollect/moneycollect-api-android-demo/mcsdk"
+        }
+     }
+
+    configurations.all {
+        resolutionStrategy.cacheChangingModulesFor 0, 'minutes'
     }
 }
 

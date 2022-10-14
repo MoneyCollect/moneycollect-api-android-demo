@@ -1,5 +1,6 @@
 package com.moneycollect.example_java;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,15 +20,15 @@ import com.moneycollect.android.model.response.Devide;
 import com.moneycollect.android.model.response.Payment;
 import com.moneycollect.android.model.response.PaymentMethod;
 import com.moneycollect.android.net.net.ApiResultCallback;
-import com.moneycollect.example.R;
+
+import com.moneycollect.example_java.activity.PaymentDemoActivity;
+import com.moneycollect.example_java.activity.PaymentLocalDemoActivity;
 import com.moneycollect.example_java.activity.PaymentSheetCustomDemoActivity;
 import com.moneycollect.example_java.activity.PaymentSheetDemoActivity;
-import com.moneycollect.example.databinding.ActivityMainBinding;
+import com.moneycollect.example_java.databinding.ActivityMainBinding;
 import com.moneycollect.example_java.activity.CreateCustomerActivity;
-import com.moneycollect.example_java.activity.PayCardActivity;
 import com.moneycollect.example_java.activity.PaymentExampleActivity;
 import com.moneycollect.example_java.activity.PaymentMethodExampleActivity;
-import com.moneycollect.example_java.activity.SaveCardActivity;
 import com.moneycollect.example_java.activity.SelectButtonTypeActivity;
 import com.moneycollect.example_java.activity.SelectCustomerPaymentMethodListActivity;
 import com.moneycollect.example_java.activity.SettingsActivity;
@@ -49,20 +50,9 @@ public class MainActivity extends BaseExampleActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
-
         viewBinding.expandedMenu.setHasFixedSize(true);
         viewBinding.expandedMenu.setLayoutManager(linearLayoutManager);
         viewBinding.expandedMenu.setAdapter(new ExamplesAdapter(this));
-
-//        createCustomer();
-//        createPaymentMethod();
-//        attachPaymentMethod();
-//        selectAllPaymentMethods();
-//        createPayment();
-//        confirmPayment();
-//        retrievePayment();
-//        retrievePaymentMethod();
-//        uploadDevice();
     }
 
 
@@ -218,6 +208,8 @@ public class MainActivity extends BaseExampleActivity {
         }
 
         private void initList() {
+            items.add(new Item(activity.getString(R.string.payment_demo_example), PaymentDemoActivity.class));
+            items.add(new Item(activity.getString(R.string.payment_local_demo_example), PaymentLocalDemoActivity.class));
             items.add(new Item(activity.getString(R.string.payment_sheet_demo_example), PaymentSheetDemoActivity.class));
             items.add(new Item(activity.getString(R.string.payment_sheet_demo_custom_example), PaymentSheetCustomDemoActivity.class));
             items.add(new Item(activity.getString(R.string.payment_card_paymentMethod_example), PaymentMethodExampleActivity.class));
@@ -230,7 +222,6 @@ public class MainActivity extends BaseExampleActivity {
 
         private List<Item> items = new ArrayList<>();
 
-
         @NonNull
         @Override
         public ExamplesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -239,7 +230,7 @@ public class MainActivity extends BaseExampleActivity {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull ExamplesViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull ExamplesViewHolder holder, @SuppressLint("RecyclerView") int position) {
             TextView textView = holder.textView;
             textView.setText(items.get(position).text);
             textView.setOnClickListener(new View.OnClickListener() {
@@ -248,7 +239,6 @@ public class MainActivity extends BaseExampleActivity {
                     activity.startActivity(new Intent(activity, items.get(position).activityClass));
                 }
             });
-
         }
 
         @Override

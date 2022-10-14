@@ -44,7 +44,7 @@ server.port=9898
          viewBinding = true
     }
  ```
- 
+
  ```
  dependencies {
     //The specific version number will be determined according to your needs

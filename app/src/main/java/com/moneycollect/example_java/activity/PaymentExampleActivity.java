@@ -14,8 +14,8 @@ import com.moneycollect.android.model.request.RequestCreatePayment;
 import com.moneycollect.android.model.response.Payment;
 import com.moneycollect.android.net.net.ApiResultCallback;
 import com.moneycollect.android.utils.MoneyCollectButtonUtils;
-import com.moneycollect.example.R;
-import com.moneycollect.example.databinding.ActivityCreatePaymentLayoutBinding;
+import com.moneycollect.example_java.R;
+import com.moneycollect.example_java.databinding.ActivityCreatePaymentLayoutBinding;
 import com.moneycollect.example_java.BaseExampleActivity;
 import com.moneycollect.example_java.TestRequestData;
 import com.moneycollect.example_java.utils.TempUtils;
@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import java.math.BigInteger;
 
 /**
- * [PaymentExampleActivity] show create Payment、retrieve Payment and confirm Payment  sample
+ * {@link PaymentExampleActivity} show create Payment、retrieve Payment and confirm Payment  sample
  */
 public class PaymentExampleActivity extends BaseExampleActivity implements View.OnClickListener{
 

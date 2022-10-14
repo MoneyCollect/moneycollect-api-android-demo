@@ -45,5 +45,7 @@ public class Constant {
     public final static String PAYMENT_CANCELED_MESSAGE = "the payment is canceled";
     public final static String PAYMENT_DEFAULT_MESSAGE = "the payment is pending";
 
+    //local scheme url
+    public static String PAYMENT_LOCAL_SCHEME_URL = "";
 
 }

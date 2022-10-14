@@ -6,7 +6,7 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.moneycollect.example.R;
+import com.moneycollect.example_java.R;
 import com.moneycollect.example_java.Constant;
 
 

@@ -1,6 +1,9 @@
 <resources>
     <!--MainActivity-->
     <string name="app_name">MoneyCollect SDK</string>
+    <string name="payment_demo_example">Payment Demo</string>
+    <string name="payment_google_example">GooglePay Demo</string>
+    <string name="payment_local_demo_example">LocalPayment Demo</string>
     <string name="payment_sheet_demo_example">PaymentSheet Demo</string>
     <string name="payment_sheet_demo_custom_example">PaymentSheet Custom Demo</string>
     <string name="payment_card_pay_example">Card Pay Example</string>
@@ -13,6 +16,7 @@
     <string name="payment_card_payment_example">Payment Example</string>
     <string name="payment_select_button_type_example">Select Button Type Example</string>
     <string name="payment_select_button_type_setting">Setting</string>
+    <string name="payment_select_button_type_logger">Logger</string>
     <string name="payment_select_button_example">Button Example</string>
 
     <!--SettingActivity currency unit-->
@@ -23,8 +27,34 @@
     <string name="setting_currency_usd_tag">$</string>
     <string name="setting_currency_krw_tag">₩</string>
     <string name="setting_currency_iqd_tag">ID</string>
+    <string name="setting_currency_eur_tag">€</string>
+
+    <string name="setting_channel_unit">Channel Unit</string>
+    <string name="setting_channel_h5">H5</string>
+    <string name="setting_channel_app">APP</string>
+
+    <string name="setting_web_page_unit">WebPage Jump</string>
+    <string name="setting_web_page_webview">WebView</string>
+    <string name="setting_web_page_browser">Browser</string>
+
+    <string name="payment_setting_page">Payment setting</string>
+
+    <string name="payment_information">Payment Information</string>
+    <string name="country_key">country_valve</string>
+    <string name="country_title">Country</string>
+    <string name="currency_key">amount_currency</string>
+    <string name="currency_title">Currency</string>
+    <string name="amount_key">amount_value</string>
+    <string name="amount_title">Amount</string>
+    <string name="channel_key">channel_value</string>
+    <string name="channel_title">Channel</string>
+
+    <string name="add_payment_method">Local payment</string>
+    <string name="add_local_payment_method_key">add_local_payment_method_value</string>
+    <string name="add_local_payment_method_title">Add payment</string>
 
     <!--PaymentSheet Demo Activity-->
+    <string name="paymentsheet_select_payment">Select Payment</string>
     <string name="paymentsheet_secure_payment">Secure Payment</string>
     <string name="paymentsheet_your_cart">Your cart</string>
     <string name="paymentsheet_total">total</string>
@@ -37,6 +67,10 @@
     <string name="paymentsheet_item_goods_name">Goods Name</string>
     <string name="paymentsheet_item_goods_price">$2.00</string>
     <string name="paymentsheet_item_goods_amount">X1</string>
+
+    <!--Payment Demo Activity-->
+    <string name="payment_now_payment_str">Pay Now</string>
+    <string name="payment_now_continue_str">Continue</string>
 
     //web
     <string name="payment_browser_confirm_title">Would you like to cancel the payment?</string>
@@ -90,4 +124,16 @@
     <string name="create_payment_method_error_str">Create PaymentMethod error...</string>
     <string name="select_payment_method_list_success_str">Select PaymentMethod list success...</string>
     <string name="select_payment_method_list_error_str">Select PaymentMethod list error...</string>
+
+
+    <!-- Checkout activity -->
+    <string name="title_activity_checkout">CheckoutActivity</string>
+    <string name="checkout_item_description">Description</string>
+    <string name="googlepay_status_unavailable" translatable="false">Unfortunately, Google Pay isnot available on this phone.</string>
+    <string name="payments_show_name" translatable="false">Successfully received payment data for%s!</string>
+    <string name="googlepay_button_content_description">Google Pay</string>
+    <string name="buy_with_googlepay_button_content_description">Buy with Google Pay</string>
+
+    <string name="googlepay_gateway_replace_name_example">"Gateway name set to \"example\" - please modify Constants.java and replace it with your own gateway."</string>
+
 </resources>

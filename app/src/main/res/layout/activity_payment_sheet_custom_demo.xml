@@ -38,7 +38,7 @@
                 app:title="">
 
                 <RelativeLayout
-                    android:id="@+id/moneycollect_payment_backfl"
+                    android:id="@+id/asiabill_payment_backfl"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:paddingLeft="@dimen/size_6dp"

@@ -7,7 +7,7 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.moneycollect.android.model.request.RequestCreateCustomer;
 import com.moneycollect.android.model.request.RequestPaymentMethod;
-import com.moneycollect.example.R;
+import com.moneycollect.example_java.R;
 
 public class TempUtils {
     public static String formatString(String text){

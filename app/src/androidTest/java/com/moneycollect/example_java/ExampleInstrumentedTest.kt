@@ -1,4 +1,4 @@
-package com.moneycollect.example
+package com.moneycollect.example_java
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

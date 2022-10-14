@@ -8,19 +8,19 @@ import android.view.Window;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.moneycollect.android.model.enumeration.MoneyCollectPaymentModel;
-import com.moneycollect.example.R;
-import com.moneycollect.example.databinding.ActivityPayCardBinding;
+import com.moneycollect.example_java.R;
+import com.moneycollect.example_java.databinding.ActivityPayCardBinding;
 import com.moneycollect.example_java.BaseExampleActivity;
 import com.moneycollect.example_java.Constant;
-import com.moneycollect.example_java.TestRequestData;
 import com.moneycollect.example_java.fragment.AddWithPaymentFragment;
 import com.moneycollect.example_java.fragment.SaveWithPaymentCardFragment;
 
 /**
- * [PayCardActivity] contain [SaveWithPaymentCardFragment] and [AddWithPaymentFragment],Support them to switch to each other
+ * {@link PayCardActivity} contain {@link SaveWithPaymentCardFragment} and {@link AddWithPaymentFragment}
+ * Support them to switch to each other
  */
 public class PayCardActivity extends BaseExampleActivity {
 
@@ -38,7 +38,9 @@ public class PayCardActivity extends BaseExampleActivity {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         viewBinding = ActivityPayCardBinding.inflate(getLayoutInflater());
         setContentView(viewBinding.getRoot());
-        getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        if (getWindow()!=null) {
+            getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        }
         initUi();
     }
 
@@ -52,30 +54,42 @@ public class PayCardActivity extends BaseExampleActivity {
      */
     @SuppressLint("UseCompatLoadingForDrawables")
     public void switchContent(String tag) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        for (Fragment fragment : getSupportFragmentManager().getFragments()) {
-            if (!fragment.getTag().equals(tag)) {
-                transaction.hide(fragment);
-            }
-        }
-        Fragment to=null;
-        Bundle bundle = getIntent().getBundleExtra(Constant.CURRENT_PAYMENT_BUNDLE);
-        if (tag.equals(SAVE_PAYMENT)){
-            to = new SaveWithPaymentCardFragment();
-            CURRENT_PAYMENT = SAVE_PAYMENT;
-        }else if (tag.equals(ADD_PAYMENT)){
-            to = new AddWithPaymentFragment();
-            CURRENT_PAYMENT = ADD_PAYMENT;
-        }
+        FragmentManager fragmentManager=getSupportFragmentManager();
+        if (fragmentManager!=null) {
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            if (transaction!=null) {
+                for (Fragment fragment : fragmentManager.getFragments()) {
+                    if (!fragment.getTag().equals(tag)) {
+                        transaction.hide(fragment);
+                    }
+                }
 
-        to.setArguments(bundle);
-        transaction.addToBackStack(tag)
-                .setCustomAnimations(R.animator.animator_enter,R.animator.animator_exit,R.animator.animator_enter,R.animator.animator_exit);
-        if (to != null) {
-            if (!to.isAdded()) {
-                transaction.add(bottomContainer.getId(), to, tag).commit();
-            } else {
-                transaction.show(to).commit();
+                Fragment to = null;
+                Bundle bundle = null;
+                if (getIntent() != null) {
+                    bundle = getIntent().getBundleExtra(Constant.CURRENT_PAYMENT_BUNDLE);
+                }
+
+                if (tag.equals(SAVE_PAYMENT)) {
+                    to = new SaveWithPaymentCardFragment();
+                    CURRENT_PAYMENT = SAVE_PAYMENT;
+                } else if (tag.equals(ADD_PAYMENT)) {
+                    to = new AddWithPaymentFragment();
+                    CURRENT_PAYMENT = ADD_PAYMENT;
+                }
+
+                transaction.addToBackStack(tag)
+                        .setCustomAnimations(R.animator.animator_enter, R.animator.animator_exit, R.animator.animator_enter, R.animator.animator_exit);
+                if (to != null) {
+                    if (bundle!=null) {
+                        to.setArguments(bundle);
+                    }
+                    if (!to.isAdded()) {
+                        transaction.add(bottomContainer.getId(), to, tag).commit();
+                    } else {
+                        transaction.show(to).commit();
+                    }
+                }
             }
         }
     }
