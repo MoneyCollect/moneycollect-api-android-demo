@@ -48,7 +48,7 @@ server.port=9898
  ```
  dependencies {
     //The specific version number will be determined according to your needs
-    implementation "com.moneycollect.payment:android_mc:0.0.1"
+    implementation "com.moneycollect.payment:android_mc:0.0.2"
  }
  ```
 
