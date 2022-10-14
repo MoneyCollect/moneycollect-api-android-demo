@@ -27,17 +27,15 @@ import com.moneycollect.example.R
 import com.moneycollect.example.TestRequestData
 import com.moneycollect.example.databinding.ActivityPaymentSheetDemoBinding
 import com.moneycollect.example.utils.*
-import com.moneycollect.example.utils.getCurrencyDecimalFormat
 import java.math.BigDecimal
 import java.math.RoundingMode
 
 
-class PaymentSheetDemoActivity : AppCompatActivity(), View.OnClickListener {
+class PaymentLocalDemoActivity : AppCompatActivity(), View.OnClickListener {
     private val TAG: String = "PaymentSheetDemoActivity_PaymentResult"
 
     // PaymentModel (PAY)  payment model,support save and pay
-    var currentPaymentModel: MoneyCollectPaymentModel =
-        MoneyCollectPaymentModel.PAY
+    var currentPaymentModel: MoneyCollectPaymentModel = MoneyCollectPaymentModel.PAY_LOCAL
 
     // Current Currency Unit
     val currencyUnit = TestRequestData.currency
@@ -68,7 +66,7 @@ class PaymentSheetDemoActivity : AppCompatActivity(), View.OnClickListener {
             .apply {
                 orientation = LinearLayoutManager.VERTICAL
             }
-        paymentSheetDemoAdapter = PaymentSheetDemoAdapter(this@PaymentSheetDemoActivity)
+        paymentSheetDemoAdapter = PaymentSheetDemoAdapter(this@PaymentLocalDemoActivity)
         viewBinding?.sheetExpandedMenuRl?.run {
             setHasFixedSize(true)
             layoutManager = linearLayoutManager
@@ -113,7 +111,7 @@ class PaymentSheetDemoActivity : AppCompatActivity(), View.OnClickListener {
         }
         df?.setRoundingMode(RoundingMode.HALF_UP)
         viewBinding?.paymentCheckoutAmount?.setText(getCurrencyUnitTag(currencyUnit,
-            this@PaymentSheetDemoActivity) + df?.format(
+            this@PaymentLocalDemoActivity) + df?.format(
             amount))
     }
 
@@ -125,10 +123,10 @@ class PaymentSheetDemoActivity : AppCompatActivity(), View.OnClickListener {
         var lineItems = ArrayList<RequestCreatePayment.LineItems>()
         for (item in arrayItem) {
             item.amount?.let {
-                val numamount = BigDecimal(item.amount)
+                val numAmount = BigDecimal(item.amount)
                 val numUnit = getCurrencyTransnum(item.currency)
-                var amount = numamount.multiply(numUnit)
-                var lineItem = RequestCreatePayment.LineItems(
+                val amount = numAmount.multiply(numUnit)
+                val lineItem = RequestCreatePayment.LineItems(
                     amount = amount.toBigInteger(),
                     currency = item.currency,
                     description = item.name,
@@ -148,23 +146,21 @@ class PaymentSheetDemoActivity : AppCompatActivity(), View.OnClickListener {
                 if (view.id == R.id.back_icon || view.id == R.id.payment_cancel_btn) {
                     finish()
                 } else if (view.id == R.id.payment_checkout_btn) {
-                    var intent = Intent(this, PayCardActivity::class.java)
+                    var intent = Intent(this, LocalPaymentActivity::class.java)
                     var bundle = Bundle()
                     var testRequestPayment = TestRequestData.testRequestPayment
-                    var testConfirmPayment = TestRequestData.testConfirmPayment
+
                     var testRequestPaymentMethod = TestRequestData.testRequestPaymentMethod
-                    var testBankIvList = TestRequestData.testBankIvList
                     testRequestPayment.lineItems = formatlineItems(checkedItem)
                     val numamount = BigDecimal(
                         (viewBinding?.paymentCheckoutAmount?.text.toString()).replace(
-                            getCurrencyUnitTag(currencyUnit, this@PaymentSheetDemoActivity),
+                            getCurrencyUnitTag(currencyUnit, this@PaymentLocalDemoActivity),
                             ""
                         )
                     )
                     val numUnit = getCurrencyTransnum(currencyUnit)
                     var amount = numamount.multiply(numUnit)
                     testRequestPayment.amount = amount.toBigInteger();
-                    testConfirmPayment.amount = amount.toBigInteger();
                     //pass currentPaymentModel
                     bundle.putSerializable(
                         Constant.CURRENT_PAYMENT_MODEL,
@@ -175,12 +171,8 @@ class PaymentSheetDemoActivity : AppCompatActivity(), View.OnClickListener {
                         Constant.CREATE_PAYMENT_REQUEST_TAG,
                         testRequestPayment
                     )
-                    //pass RequestConfirmPayment
-                    bundle.putParcelable(
-                        Constant.CONFIRM_PAYMENT_REQUEST_TAG,
-                        testConfirmPayment
-                    )
-                    //pass currentId
+
+                    //pass customerId
                     bundle.putString(
                         Constant.CUSTOMER_ID_TAG,
                         TestRequestData.customerId
@@ -188,8 +180,7 @@ class PaymentSheetDemoActivity : AppCompatActivity(), View.OnClickListener {
                     //pass default RequestPaymentMethod
                     bundle?.putParcelable(Constant.CREATE_PAYMENT_METHOD_REQUEST_TAG,
                         testRequestPaymentMethod)
-                    //pass default supportBankList
-                    bundle?.putSerializable(Constant.SUPPORT_BANK_LIST_TAG, testBankIvList)
+
                     intent.putExtra(CURRENT_PAYMENT_BUNDLE, bundle)
                     startActivityLauncher.launch(intent)
                 }
@@ -233,7 +224,7 @@ class PaymentSheetDemoActivity : AppCompatActivity(), View.OnClickListener {
 
 
     private class PaymentSheetDemoAdapter constructor(
-        private val activity: PaymentSheetDemoActivity,
+        private val activity: PaymentLocalDemoActivity,
     ) : RecyclerView.Adapter<PaymentSheetDemoAdapter.ExamplesViewHolder>() {
 
         private var itemClickListener: IKotlinItemClickListener? = null

@@ -44,7 +44,7 @@ server.port=9898
          viewBinding = true
     }
  ```
- 
+
  ```
  dependencies {
     //The specific version number will be determined according to your needs
@@ -168,3 +168,5 @@ There are several test cards you can use to make sure your integration is ready 
 | 5555 5555 5555 4444    | Mastercard      | Succeeds and immediately processes the payment. |
 | 4000 0025 0000 3155    | Visa            | 3D Secure 2 authentication . |
 | 4000 0000 0000 0077    | Visa            | Always fails with a decline code of `declined`. |
+
+

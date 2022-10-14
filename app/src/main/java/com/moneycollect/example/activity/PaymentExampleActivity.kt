@@ -62,7 +62,7 @@ class PaymentExampleActivity : BaseExampleActivity(), View.OnClickListener {
      */
     private fun createPayment() {
         val createPayment = TestRequestData.testRequestPayment
-        if (createPayment.confirmationMethod === RequestCreatePayment.ConfirmationMethod.Automatic) {
+        if (createPayment.confirmationMethod == RequestCreatePayment.ConfirmationMethod.Automatic) {
             if (TextUtils.isEmpty(createPayment.paymentMethod)) {
                 showToast(getString(R.string.payment_method_empty_str))
                 return

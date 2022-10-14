@@ -26,7 +26,7 @@ import com.moneycollect.example.databinding.ActivityMainBinding
 
 class MainActivity : BaseExampleActivity() {
 
-    private val TAG: String = "MoneyCollect_MainActivity"
+    private val TAG: String = "MC_MainActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,10 +44,158 @@ class MainActivity : BaseExampleActivity() {
         }
     }
 
+    private fun uploadDevice() {
+        moneyCollect.uploadDevice(this,
+            object : ApiResultCallback<Devide> {
+                override fun onSuccess(result: Devide) {
+
+                    Log.e(TAG, result.toString())
+                }
+
+                override fun onError(e: Exception) {
+
+                    Log.e(TAG, e.toString())
+                }
+            })
+    }
+
+    fun createCustomer() {
+        val requestCustomer = testCustomer
+        moneyCollect.createCustomer(requestCustomer,
+            object : ApiResultCallback<Customer> {
+                override fun onSuccess(result: Customer) {
+
+                    Log.e(TAG, result.toString())
+                }
+
+                override fun onError(e: Exception) {
+
+                    Log.e(TAG, e.toString())
+                }
+            })
+    }
+
+    fun createPaymentMethod() {
+        val createPaymentMethod = RequestPaymentMethod("card", testBilling, testCard)
+        moneyCollect.createPaymentMethod(this, createPaymentMethod,
+            object : ApiResultCallback<PaymentMethod> {
+                override fun onSuccess(result: PaymentMethod) {
+
+                    Log.e(TAG, result.toString())
+                }
+
+                override fun onError(e: Exception) {
+
+                    Log.e(TAG, e.toString())
+                }
+            })
+    }
+
+    fun attachPaymentMethod() {
+        moneyCollect.attachPaymentMethod(paymentMethodId, customerId,
+            object : ApiResultCallback<Any> {
+                override fun onSuccess(result: Any) {
+                    Log.e(TAG, result.toString())
+                }
+
+                override fun onError(e: Exception) {
+                    Log.e(TAG, e.toString())
+                }
+            })
+    }
+
+    fun selectAllPaymentMethods() {
+        val customerId = customerId
+        moneyCollect.selectAllPaymentMethods(customerId,
+            object : ApiResultCallback<Any> {
+                override fun onSuccess(result: Any) {
+
+                    Log.e(TAG, result.toString())
+                }
+
+                override fun onError(e: Exception) {
+
+                    Log.e(TAG, e.toString())
+                }
+            })
+    }
+
+    fun createPayment() {
+        val createPayment = testRequestPayment
+        moneyCollect.createPayment(createPayment,
+            object : ApiResultCallback<Payment> {
+                override fun onSuccess(result: Payment) {
+
+                    Log.e(TAG, result.toString())
+                }
+
+                override fun onError(e: Exception) {
+
+                    Log.e(TAG, e.toString())
+                }
+            })
+    }
+
+    fun confirmPayment() {
+        val confirmPayment = testConfirmPayment
+        val clientSecret = clientSecret
+        moneyCollect.confirmPayment(confirmPayment, clientSecret,
+            object : ApiResultCallback<Payment> {
+                override fun onSuccess(result: Payment) {
+
+                    Log.e(TAG, result.toString())
+                }
+
+                override fun onError(e: Exception) {
+
+                    Log.e(TAG, e.toString())
+                }
+            })
+    }
+
+    fun retrievePayment() {
+        val clientSecret = clientSecret
+        moneyCollect.retrievePayment(paymentId, clientSecret,
+            object : ApiResultCallback<Payment> {
+                override fun onSuccess(result: Payment) {
+
+                    Log.e(TAG, result.toString())
+                }
+
+                override fun onError(e: Exception) {
+
+                    Log.e(TAG, e.toString())
+                }
+            })
+    }
+
+    fun retrievePaymentMethod() {
+        moneyCollect.retrievePaymentMethod(paymentMethodId,
+            object : ApiResultCallback<PaymentMethod> {
+                override fun onSuccess(result: PaymentMethod) {
+
+                    Log.e(TAG, result.toString())
+                }
+
+                override fun onError(e: Exception) {
+
+                    Log.e(TAG, e.toString())
+                }
+            })
+    }
+
     private class ExamplesAdapter constructor(
         private val activity: Activity
     ) : RecyclerView.Adapter<ExamplesAdapter.ExamplesViewHolder>() {
         private val items = listOf(
+            Item(
+                activity.getString(R.string.payment_demo_example),
+                PaymentDemoActivity::class.java
+            ),
+            Item(
+                activity.getString(R.string.payment_local_demo_example),
+                PaymentLocalDemoActivity::class.java
+            ),
             Item(
                 activity.getString(R.string.payment_sheet_demo_example),
                 PaymentSheetDemoActivity::class.java
@@ -86,11 +234,11 @@ class MainActivity : BaseExampleActivity() {
             return ExamplesViewHolder(root)
         }
 
-        override fun onBindViewHolder(examplesViewHolder: ExamplesViewHolder, i: Int) {
+        override fun onBindViewHolder(examplesViewHolder: ExamplesViewHolder, position: Int) {
             val itemView = examplesViewHolder.itemView
-            (itemView as TextView).text = items[i].text
+            (itemView as TextView).text = items[position].text
             itemView.setOnClickListener {
-                activity.startActivity(Intent(activity, items[i].activityClass))
+                activity.startActivity(Intent(activity, items[position].activityClass))
             }
         }
 
@@ -98,7 +246,7 @@ class MainActivity : BaseExampleActivity() {
             return items.size
         }
 
-        private data class Item constructor(val text: String, val activityClass: Class<*>)
+        private data class Item(val text: String, val activityClass: Class<*>?)
 
         private class ExamplesViewHolder constructor(
             itemView: View

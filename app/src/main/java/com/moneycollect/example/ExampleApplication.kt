@@ -6,13 +6,8 @@ import com.moneycollect.android.MoneyCollectSdk
 class ExampleApplication : Application() {
 
     override fun onCreate() {
-
         //init MoneyCollectSdk
-        MoneyCollectSdk.init(this,
-            "test_pu_1sWrsjQP9PJiCwGsYv3risSn8YBCIEMNoVFIo8eR6s",
-            "http://192.168.2.100:9898/")
-
+        MoneyCollectSdk.init(this, "live_pr_97pxAhtkXCgm8Dd08L3NNTfV23hWRno9D9XZc9KnlK4","https://api.moneycollect.com")
         super.onCreate()
-
     }
 }

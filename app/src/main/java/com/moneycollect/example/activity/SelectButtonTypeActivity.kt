@@ -58,7 +58,6 @@ class SelectButtonTypeActivity : BaseExampleActivity(),View.OnClickListener{
 
         buttonWidget=viewBinding?.buttonWidget
 
-
         val params= MoneyCollectButtonViewParams.Builder()
             .activity(this)
             .moneyCollectPaymentModel(moneyCollectPaymentModel)
@@ -69,7 +68,9 @@ class SelectButtonTypeActivity : BaseExampleActivity(),View.OnClickListener{
             .completeAnimTimeOut(3000L)
             .build()
         buttonWidget?.setMoneyCollectButtonViewParams(params)
-        buttonWidget?.cardConfirmButton?.setOnClickListener(this)  //set button onClick
+
+        //set button onClick
+        buttonWidget?.cardConfirmButton?.setOnClickListener(this)
     }
 
     /**

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.moneycollect.example">
 
+    <uses-permission android:name="android.permission.REORDER_TASKS" />
+
     <application
         android:name=".ExampleApplication"
         android:allowBackup="true"
@@ -11,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NewMerchantManagerSDK">
 
-        <activity android:name="com.moneycollect.example.MainActivity">
+        <activity android:name="com.moneycollect.example.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -25,6 +28,12 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name="com.moneycollect.example.activity.PayCardActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyTheme.Dialog"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.moneycollect.example.activity.LocalPaymentActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/MyTheme.Dialog"
@@ -54,6 +63,18 @@
             android:theme="@style/MyThemeLight"
             android:windowSoftInputMode="adjustResize" />
         <activity
+            android:name="com.moneycollect.example.activity.PaymentDemoActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyThemeLight"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.moneycollect.example.activity.PaymentLocalDemoActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyThemeLight"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
             android:name="com.moneycollect.example.activity.PaymentSheetDemoActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
@@ -77,13 +98,37 @@
             android:screenOrientation="portrait"
             android:theme="@style/MyThemeLight"
             android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name="com.moneycollect.example.activity.ValidationLocalWebActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyThemeLight"
+            android:exported="true"/>
+
+        <activity
+            android:name="com.moneycollect.example.activity.SchemeReceiveActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyThemeLight"
+            android:exported="true">
+            <intent-filter>
+                <!-- 协议部分，随便设置 -->
+                <data
+                    android:host="payment"
+                    android:path="/webpay"
+                    android:port="8080"
+                    android:scheme="asiabill" />
+                <!-- 下面这几行也必须得设置 -->
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activity.SettingsActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/MyThemeLight"
             android:windowSoftInputMode="adjustResize" />
-
     </application>
 
 </manifest>

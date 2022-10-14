@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/payment_information">
+
+        <EditTextPreference
+            android:key="@string/country_key"
+            android:title="@string/country_title"
+            android:defaultValue="US"/>
+
+        <EditTextPreference
+            android:key="@string/currency_key"
+            android:title="@string/currency_title"
+            android:defaultValue="USD"/>
+
+<!--        <EditTextPreference-->
+<!--            android:inputType="number"-->
+<!--            android:key="@string/amount_key"-->
+<!--            android:title="@string/amount_title"-->
+<!--            android:defaultValue="100"/>-->
+
+        <EditTextPreference
+            android:key="@string/channel_key"
+            android:title="@string/channel_title"
+            android:defaultValue="APP" />
+
+    </PreferenceCategory>
+
+<!--    <PreferenceCategory android:title="@string/add_payment_method">-->
+<!--        <EditTextPreference-->
+<!--            android:key="@string/add_local_payment_method_key"-->
+<!--            android:title="@string/add_local_payment_method_title" />-->
+<!--    </PreferenceCategory>-->
+</PreferenceScreen>

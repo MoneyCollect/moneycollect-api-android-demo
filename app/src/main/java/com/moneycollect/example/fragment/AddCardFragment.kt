@@ -69,7 +69,7 @@ class AddCardFragment : BaseExampleFragment(),View.OnClickListener{
         supportBankList = arguments?.getSerializable(Constant.SUPPORT_BANK_LIST_TAG) as ArrayList<Int>?
 
         moneyCollectContentView= viewBinding?.mcAddContentWidget
-        moneyCollectResultBackInterface=moneyCollectContentView
+        moneyCollectResultBackInterface = moneyCollectContentView?.gainMoneyCollectResultBackInterface()
         val moneyCollectContentViewParamsBuilder = MoneyCollectContentViewParams.Builder()
             .activity(activity)
             .moneyCollectPaymentModel(currentModel)
@@ -91,7 +91,8 @@ class AddCardFragment : BaseExampleFragment(),View.OnClickListener{
                 moneyCollectContentViewParamsBuilder.email(currentRequestCreatePaymentMethod?.billingDetails?.email)
             }
         }
-        moneyCollectContentView?.setMoneyCollectContentViewParams(moneyCollectContentViewParamsBuilder.build())
+        moneyCollectContentView?.setMoneyCollectContentViewParams(
+            moneyCollectContentViewParamsBuilder.build())
 
         activity?.let {
             moneyCollectContentView?.contentResultParamsLiveData?.observe(it,
@@ -146,7 +147,7 @@ class AddCardFragment : BaseExampleFragment(),View.OnClickListener{
         activity?.let {
             val error = checkRequestPaymentMethodData(activity, requestPaymentMethod)
             if (!TextUtils.isEmpty(error)) {
-                moneyCollectResultBackInterface!!.failExceptionBack(error)
+                moneyCollectResultBackInterface?.failExceptionBack(error)
                 return
             }
 

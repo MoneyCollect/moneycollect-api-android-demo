@@ -1,5 +1,6 @@
 package com.moneycollect.example.activity
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -32,7 +33,6 @@ import com.moneycollect.example.databinding.ActivityPaymentSheetCustomDemoBindin
 import com.moneycollect.example.utils.*
 import java.math.BigDecimal
 import java.math.RoundingMode
-import java.text.DecimalFormat
 
 class PaymentSheetCustomDemoActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -248,6 +248,7 @@ class PaymentSheetCustomDemoActivity : AppCompatActivity(), View.OnClickListener
                 currency = it.currency,
                 customerId = it.customerId,
                 description = it.description,
+                fromChannel = it.fromChannel,
                 ip = it.ip,
                 lineItems = it.lineItems,
                 notifyUrl = it.notifyUrl,
@@ -265,6 +266,7 @@ class PaymentSheetCustomDemoActivity : AppCompatActivity(), View.OnClickListener
                 ),
                 statementDescriptor = it.statementDescriptor,
                 statementDescriptorSuffix = it.statementDescriptorSuffix,
+                userAgent = it.userAgent,
                 website = it.website
             )
 
@@ -448,7 +450,7 @@ class PaymentSheetCustomDemoActivity : AppCompatActivity(), View.OnClickListener
                 if (payment != null) {
                     when (payment.status) {
                         Constant.PAYMENT_SUCCEEDED -> {
-                            Log.e(TAG, Constant.PAYMENT_SUCCEEDED)
+                            Log.e(TAG, Constant.PAYMENT_SUCCESSFUL_MESSAGE)
                         }
                         Constant.PAYMENT_FAILED -> {
                             payment?.errorMessage?.let { it1 ->
@@ -494,7 +496,7 @@ class PaymentSheetCustomDemoActivity : AppCompatActivity(), View.OnClickListener
             Item(
                 R.mipmap.icon_payment_goods_two,
                 "GPS Smartwatch T3",
-                "11069.00",
+                "110.00",
                 activity.currencyUnit,
                 "Waterproof Smartwatch A5",
                 1,
@@ -512,7 +514,7 @@ class PaymentSheetCustomDemoActivity : AppCompatActivity(), View.OnClickListener
             Item(
                 R.mipmap.icon_payment_goods_four,
                 "Waterproof Smartwatch A6",
-                "385.00",
+                "38.00",
                 activity.currencyUnit,
                 "Waterproof Smartwatch A5",
                 1,
@@ -527,16 +529,16 @@ class PaymentSheetCustomDemoActivity : AppCompatActivity(), View.OnClickListener
             return ExamplesViewHolder(root)
         }
 
+        @SuppressLint("SetTextI18n")
         override fun onBindViewHolder(examplesViewHolder: ExamplesViewHolder, i: Int) {
             val itemView = examplesViewHolder.itemView
             items[i].images?.let {
                 itemView.findViewById<ImageView>(R.id.item_payment_goods_iv)
                     .setImageResource(it)
             }
-            itemView.findViewById<TextView>(R.id.item_payment_goods_name_tv)
-                .setText(items[i].name)
-            itemView.findViewById<TextView>(R.id.item_payment_goods_price_tv)
-                .setText(getCurrencyUnitTag(activity.currencyUnit, activity) + items[i]?.amount)
+            itemView.findViewById<TextView>(R.id.item_payment_goods_name_tv).text = items[i].name
+            itemView.findViewById<TextView>(R.id.item_payment_goods_price_tv).text =
+                getCurrencyUnitTag(activity.currencyUnit, activity) + getAmountTransferNum(activity.currencyUnit,items[i]?.amount)
             if (items[i].checked == true) {
                 itemView.findViewById<TextView>(R.id.item_payment_goods_amount_tv)
                     .setTextColor(activity.resources.getColor(R.color.color_1A73E8))

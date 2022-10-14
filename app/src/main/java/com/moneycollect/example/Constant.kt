@@ -41,9 +41,13 @@ class Constant {
         const val PAYMENT_CANCELED = "canceled"
 
         //payment status message
+        const val PAYMENT_SUCCESSFUL_MESSAGE = "the payment is successful"
         const val PAYMENT_UN_CAPTURED_MESSAGE = "the payment is uncaptured"
         const val PAYMENT_PENDING_MESSAGE = "the payment is pending"
         const val PAYMENT_CANCELED_MESSAGE = "the payment is canceled"
         const val PAYMENT_DEFAULT_MESSAGE = "the payment is pending"
+
+        //local scheme url
+        var PAYMENT_LOCAL_SCHEME_URL = ""
     }
 }

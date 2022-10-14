@@ -7,11 +7,9 @@ import android.view.Window
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
 import androidx.fragment.app.FragmentTransaction
-import com.moneycollect.android.model.enumeration.MoneyCollectPaymentModel
 import com.moneycollect.example.BaseExampleActivity
 import com.moneycollect.example.Constant
 import com.moneycollect.example.R
-import com.moneycollect.example.TestRequestData
 import com.moneycollect.example.databinding.ActivityChooseSavedCardBinding
 import com.moneycollect.example.fragment.AddCardFragment
 import com.moneycollect.example.fragment.SaveCardFragment
@@ -30,7 +28,7 @@ class SaveCardActivity : BaseExampleActivity() {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
         viewBinding = ActivityChooseSavedCardBinding.inflate(layoutInflater)
         setContentView(viewBinding!!.root)
-        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         initUi()
     }
 
@@ -51,19 +49,18 @@ class SaveCardActivity : BaseExampleActivity() {
             }
         }
         var to: Fragment? = null
-        val bundle = intent.extras?.getBundle(Constant.CURRENT_PAYMENT_BUNDLE)
+        val bundle = intent?.extras?.getBundle(Constant.CURRENT_PAYMENT_BUNDLE)
         when (tag) {
             SAVE_PAYMENT -> {
                 to = SaveCardFragment()
                 CURRENT_PAYMENT = SAVE_PAYMENT
-
             }
             ADD_PAYMENT -> {
                 to = AddCardFragment()
                 CURRENT_PAYMENT = ADD_PAYMENT
             }
         }
-        to?.arguments = bundle
+
         transaction.addToBackStack(tag)
             .setCustomAnimations(
                 R.animator.animator_enter,
@@ -72,6 +69,7 @@ class SaveCardActivity : BaseExampleActivity() {
                 R.animator.animator_exit
             )
         if (to != null) {
+            to.arguments = bundle
             if (!to.isAdded) {
                 transaction.add(bottomContainer!!.id, to, tag).commit()
             } else {

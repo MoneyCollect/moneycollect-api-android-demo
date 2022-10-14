@@ -325,7 +325,7 @@ class ValidationWebActivity : BaseExampleActivity(){
 
     override fun onDestroy() {
         if (null != sonicSession) {
-            sonicSession!!.destroy()
+            sonicSession?.destroy()
             sonicSession = null
         }
         if (popWindow != null) {
@@ -349,7 +349,7 @@ class ValidationWebActivity : BaseExampleActivity(){
             confirmDialog = null
         }
         if (window != null) {
-            window.clearFlags(WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED)
+            window?.clearFlags(WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED)
         }
         super.onDestroy()
     }

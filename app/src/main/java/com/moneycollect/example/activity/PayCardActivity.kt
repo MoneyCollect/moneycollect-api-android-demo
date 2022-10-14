@@ -7,11 +7,9 @@ import android.view.Window
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
 import androidx.fragment.app.FragmentTransaction
-import com.moneycollect.android.model.enumeration.MoneyCollectPaymentModel
 import com.moneycollect.example.BaseExampleActivity
 import com.moneycollect.example.Constant
 import com.moneycollect.example.R
-import com.moneycollect.example.TestRequestData
 import com.moneycollect.example.databinding.ActivityPayCardBinding
 import com.moneycollect.example.fragment.AddWithPaymentFragment
 import com.moneycollect.example.fragment.SaveWithPaymentCardFragment
@@ -30,7 +28,7 @@ class PayCardActivity : BaseExampleActivity(){
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
         viewBinding = ActivityPayCardBinding.inflate(layoutInflater)
         setContentView(viewBinding!!.root)
-        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         initUi()
     }
 
@@ -51,7 +49,7 @@ class PayCardActivity : BaseExampleActivity(){
             }
         }
          var to:Fragment?=null
-         val bundle = intent.extras?.getBundle(Constant.CURRENT_PAYMENT_BUNDLE)
+         val bundle = intent?.extras?.getBundle(Constant.CURRENT_PAYMENT_BUNDLE)
          when (tag) {
              SAVE_PAYMENT -> {
                  to = SaveWithPaymentCardFragment()
@@ -63,14 +61,13 @@ class PayCardActivity : BaseExampleActivity(){
              }
          }
 
-         to?.arguments=bundle
-
          transaction.addToBackStack(tag)
              .setCustomAnimations(R.animator.animator_enter,
                  R.animator.animator_exit,
                  R.animator.animator_enter,
                  R.animator.animator_exit)
          if (to != null) {
+             to.arguments=bundle
              if (!to.isAdded) {
                  transaction.add(bottomContainer!!.id, to, tag).commit()
              } else {

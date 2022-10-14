@@ -20,6 +20,7 @@ import com.moneycollect.android.ui.view.MoneyCollectCardListView
 import com.moneycollect.example.BaseExampleFragment
 import com.moneycollect.example.Constant
 import com.moneycollect.example.R
+import com.moneycollect.example.TestRequestData
 import com.moneycollect.example.activity.PayCardActivity
 import com.moneycollect.example.activity.ValidationWebActivity
 import com.moneycollect.example.databinding.FragmentSaveWithPaymentLayoutBinding
@@ -116,16 +117,20 @@ class SaveWithPaymentCardFragment : BaseExampleFragment(),View.OnClickListener{
         }
         currentRequestCreatePayment?.let {
             val requestCreatePayment = RequestCreatePayment(
+                automaticPaymentMethods = it.automaticPaymentMethods,
                 amount = it.amount,
+                confirm = false,
                 confirmationMethod = it.confirmationMethod,
                 currency = it.currency,
                 customerId = it.customerId,
                 description = it.description,
+                fromChannel = it.fromChannel,
                 ip = it.ip,
                 lineItems = it.lineItems,
                 notifyUrl = it.notifyUrl,
                 orderNo = it.orderNo,
                 paymentMethod = paymentMethod.id,
+                paymentMethodTypes = TestRequestData.paymentMethodTypes,
                 preAuth = it.preAuth,
                 receiptEmail = it.receiptEmail,
                 returnUrl = it.returnUrl,
@@ -138,6 +143,7 @@ class SaveWithPaymentCardFragment : BaseExampleFragment(),View.OnClickListener{
                 ),
                 statementDescriptor = it.statementDescriptor,
                 statementDescriptorSuffix = it.statementDescriptorSuffix,
+                userAgent = it.userAgent,
                 website = it.website
             )
             if (requestCreatePayment.confirmationMethod == RequestCreatePayment.ConfirmationMethod.Automatic) {
@@ -204,15 +210,22 @@ class SaveWithPaymentCardFragment : BaseExampleFragment(),View.OnClickListener{
                     override fun onSuccess(result: Payment) {
                         //if nextAction object is not null and redirectToUrl address is not null, further 3 d verification
                         if (result.nextAction != null) {
-                            if (!TextUtils.isEmpty(result.nextAction?.redirectToUrl)) {
-                                val intent = Intent(activity, ValidationWebActivity::class.java)
-                                intent.putExtra(Constant.VALIDATION_PARAM_URL,
-                                    result.nextAction?.redirectToUrl)
-                                intent.putExtra(Constant.VALIDATION_PAYMENT_ID, result.id)
-                                intent.putExtra(Constant.VALIDATION_PAYMENT_CLIENTSECRET,
-                                    result.clientSecret)
-                                startActivityLauncher.launch(intent)
-                            } else {
+                            if (!TextUtils.isEmpty(result.nextAction?.type)) {
+                                var redirectToUrl=result.nextAction?.redirectToUrl
+                                if (result.nextAction?.type?.equals(TestRequestData.weChatPayNextActionType) == true) {
+                                    redirectToUrl=result.nextAction?.wechatPayH5?.redirectToUrl
+                                }
+                                if (!TextUtils.isEmpty(redirectToUrl)) {
+                                    val intent = Intent(activity, ValidationWebActivity::class.java)
+                                    intent.putExtra(Constant.VALIDATION_PARAM_URL, redirectToUrl)
+                                    intent.putExtra(Constant.VALIDATION_PAYMENT_ID, result.id)
+                                    intent.putExtra(Constant.VALIDATION_PAYMENT_CLIENTSECRET, result.clientSecret)
+                                    startActivityLauncher.launch(intent)
+                                } else {
+                                    moneyCollectResultBackInterface?.paymentConfirmResultBack(false,
+                                        Constant.PAYMENT_PENDING_MESSAGE)
+                                }
+                            }else {
                                 moneyCollectResultBackInterface?.paymentConfirmResultBack(false,
                                     Constant.PAYMENT_PENDING_MESSAGE)
                             }

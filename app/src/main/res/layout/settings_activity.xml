@@ -1,35 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/size_18dp"
-        android:layout_margin="@dimen/size_10dp"
-        android:paddingLeft="@dimen/size_10dp"
-        android:textColor="@color/black"
-        android:text="@string/setting_currency_unit"/>
-    <RadioGroup
-        android:id="@+id/setting_rg"
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/size_10dp"
-        android:orientation="horizontal">
-        <RadioButton
-            android:id="@+id/setting_usd_rb"
-            android:layout_width="wrap_content"
+        android:background="@color/white"
+        app:elevation="0dp"
+        tools:ignore="MissingConstraints">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/setting_currency_usd"/>
-        <RadioButton
-            android:id="@+id/setting_krw_rb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/setting_currency_krw"/>
-        <RadioButton
-            android:id="@+id/setting_iqd_rb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/setting_currency_iqd"/>
-    </RadioGroup>
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:title=""
+            app:titleEnabled="false">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:minHeight="46dp"
+                app:layout_collapseMode="pin"
+                app:title="">
+
+                <RelativeLayout
+                    android:id="@+id/asiabill_payment_backfl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="@dimen/size_6dp"
+                    android:paddingRight="@dimen/size_16dp">
+
+                    <ImageView
+                        android:id="@+id/back_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:background="@mipmap/icon_back" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/payment_setting_page"
+                    android:textColor="#333333"
+                    android:textSize="@dimen/size_18dp"
+                    android:textStyle="bold" />
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <FrameLayout
+        android:id="@+id/settingsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.configuration.ConfigurationActivity" />
+
 </LinearLayout>
+
