@@ -162,7 +162,7 @@ There are several test cards you can use to make sure your integration is ready 
 |  Card Number| Brand  |DESCRIPTION          |
 | :------------- | :------------- | :-------------- |
 | 4242 4242 4242 4242    | Visa            | Succeeds and immediately processes the payment. |
-| 3566 0020 2036 0505    | JCBA            | Succeeds and immediately processes the payment. |
+| 3566 0020 2036 0505    | JCB            | Succeeds and immediately processes the payment. |
 | 6011 1111 1111 1117    | Discover        | Succeeds and immediately processes the payment. |
 | 3782 8224 6310 0052    | American Express| Succeeds and immediately processes the payment. |
 | 5555 5555 5555 4444    | Mastercard      | Succeeds and immediately processes the payment. |
